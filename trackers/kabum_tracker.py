@@ -2,7 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def get_kabum (product_code):
+def get_kabum(product_code):
+    """
+        Given a product code from Kabum (can be picked from product URL accessing their website)
+    :param product_code:  number utilized as ID for kabum products
+    :return: dict with 3 indexes, 'product_name', 'price' for full prize and 'price_cash' for paying with boleto.
+    """
+
     base_url = 'https://www.kabum.com.br/cgi-local/site/produtos/descricao_ofertas.cgi?codigo='
 
     http_return = requests.get(base_url + str(product_code))
