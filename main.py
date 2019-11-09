@@ -12,6 +12,13 @@ print(get_terabyte(cpu['terabyte']))
 
 
 taichi = 102175  # Ryzen 5 3600
+mobo = dict()
+mobo['terabyte'] = '8567/mouse-redragon-gamer-cobra-chroma-m711-7-botoes-programaveis-10000-dpi-rgb-preto'
 # print(get_kabum(taichi))
+print(get_terabyte(mobo['terabyte']))
 cpu_2 = 102436  # Ryzen 5 3600
 # print(get_kabum(cpu_2))
+
+psu = dict()
+psu['terabyte'] = '7903/fonte-corsair-cx550-cp-9020121-ww-550w-reais-atxeps-23-pfc-ativo'
+print(get_terabyte(psu['terabyte']))
