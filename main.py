@@ -1,6 +1,8 @@
 from trackers.kabum_functions import *
 from trackers.pichau_functions import *
 from trackers.terabyte_functions import *
+import flask
+
 
 cpu = dict()
 cpu['kabum'] = 102438  # Ryzen 5 3600
