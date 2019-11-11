@@ -1,7 +1,7 @@
 from trackers.kabum_functions import *
 from trackers.pichau_functions import *
 from trackers.terabyte_functions import *
-import flask
+from flask import Flask
 
 
 cpu = dict()
@@ -24,3 +24,14 @@ cpu_2 = 102436  # Ryzen 5 3600
 psu = dict()
 psu['terabyte'] = '7903/fonte-corsair-cx550-cp-9020121-ww-550w-reais-atxeps-23-pfc-ativo'
 print(get_terabyte(psu['terabyte']))
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def home():
+    return get_terabyte(psu['terabyte'])
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
