@@ -11,22 +11,25 @@ def get_terabyte(product_string):
 
     product = dict()
 
-    grab_from_jquery(soup.find_all('script'))
+    # As Terabyte website loads the prices on the fly, the script get the values using a REGEX directly from the
+    # jquery calls to put the values inside the documents elements.
+    product_prices = grab_from_jquery(soup.find_all('script'))
+
     product["product_name"] = soup.find('h1', {"class": "tit-prod"}).text
-    # product["price"] = soup.find('p', {"class": "val-parc"})
-
-    # product["price_cash"] = soup.find_all('script')
-
-    # $('.val-prod').text('R$ 1.099,00');
-    # $('#label-val-prod').text('13% de desconto à vista');
-    # $('.valParc').text('R$ 1.263,22');
-    # $('.nParc').text('12x');
-    # $('.Parc').text('R$ 105,27');
+    product["price_cash"] = product_prices[0][0]
+    product["price"] = product_prices[0][1]
+    product["installments"] = product_prices[1][0]
 
     return product
 
 
 def grab_from_jquery(script_soup):
+    """
+    Grabs prices directly from jquery
+    :param: Beautiful object "soup" with all script tags inside get returned from url
+    :return: returns tuple, where first element contains [price_cash, price, price_for_max_installments] and second
+             element contains [maximum_number_of_installments]
+    """
     prices = []
 
     prices = [re.findall(r'.*(R\$.*)\'', str(script_soup)), re.findall(r".*nParc'.*\('(.*)'", str(script_soup))]
