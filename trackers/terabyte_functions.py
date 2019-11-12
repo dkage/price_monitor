@@ -42,8 +42,7 @@ def grab_from_jquery(script_soup):
 
 def check_availability(soup):
     if soup.find('div', {'id': 'indisponivel'}):
-        return {"product_name": 'SOLD OUT',
-                "price_cash": 'SOLD OUT',
+        return {"price_cash": 'SOLD OUT',
                 "price": 'SOLD OUT',
                 "installments": 'SOLD OUT'}
     else:
