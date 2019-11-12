@@ -9,13 +9,14 @@ def get_terabyte(product_string):
     http_return = requests.get(base_url + product_string)
     soup = BeautifulSoup(http_return.content, 'lxml')
 
-    product = dict()
+    product = check_availability(soup)
+    product["product_name"] = soup.find('h1', {"class": "tit-prod"}).text
+    if 'price' in product.keys():
+        return product
 
     # As Terabyte website loads the prices on the fly, the script get the values using a REGEX directly from the
     # jquery calls to put the values inside the documents elements.
     product_prices = grab_from_jquery(soup.find_all('script'))
-
-    product["product_name"] = soup.find('h1', {"class": "tit-prod"}).text
     product["price_cash"] = product_prices[0][0]
     product["price"] = product_prices[0][1]
     product["installments"] = product_prices[1][0]
@@ -36,3 +37,13 @@ def grab_from_jquery(script_soup):
 
     print(prices)
     return prices
+
+
+def check_availability(soup):
+    if soup.find('div', {'id': 'indisponivel'}):
+        return {"product_name": 'SOLD OUT',
+                "price_cash": 'SOLD OUT',
+                "price": 'SOLD OUT',
+                "installments": 'SOLD OUT'}
+    else:
+        return dict()
