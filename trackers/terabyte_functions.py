@@ -11,6 +11,8 @@ def get_terabyte(product_string):
 
     product = check_availability(soup)
     product["product_name"] = soup.find('h1', {"class": "tit-prod"}).text
+
+    # If product already has key price, that means that it was populated in check_availability(), so product is SOLD OUT
     if 'price' in product.keys():
         return product
 
