@@ -37,7 +37,6 @@ def grab_from_jquery(script_soup):
 
     prices = [re.findall(r'.*(R\$.*)\'', str(script_soup)), re.findall(r".*nParc'.*\('(.*)'", str(script_soup))]
 
-    print(prices)
     return prices
 
 
