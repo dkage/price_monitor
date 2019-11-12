@@ -15,7 +15,6 @@ def get_kabum(product_code):
     soup = BeautifulSoup(http_return.content, 'lxml')
 
     # Initialize
-    product = dict()
     url_redirect = str()
 
     # Kabum uses two different URL structures. If we use 'base_url' variable and put code of a product that uses the
@@ -28,14 +27,40 @@ def get_kabum(product_code):
         http_return = requests.get(url_redirect)
         soup = BeautifulSoup(http_return.content, 'lxml')
 
-    # If product is on sale, different HTML elements are used. If on sale contains div class "contTEXTO" else it's not.
-    if soup.find('div', {'class': 'contTEXTO'}):
-        product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
-        product["price"] = soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text
-        product["price_cash"] = soup.find('span', {"class": "preco_desconto_avista-cm"}).text
+    return get_product_dict(soup)
+
+
+def get_product_dict(soup):
+    product = dict()
+    product_available = check_availability(soup)
+
+    if product_available:
+        # If product is on sale, different HTML elements are used. If on sale contains div class "contTEXTO" else
+        # it's not.
+        if soup.find('div', {'class': 'contTEXTO'}):
+            product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
+            product["price"] = soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text
+            product["price_cash"] = soup.find('span', {"class": "preco_desconto_avista-cm"}).text
+        else:
+            product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
+            product["price"] = str(soup.find('div', {"class": "preco_normal"}).text).strip()
+            product["price_cash"] = soup.find('span', {"class": "preco_desconto"}).find('strong').text
     else:
-        product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
-        product["price"] = str(soup.find('div', {"class": "preco_normal"}).text).strip()
-        product["price_cash"] = soup.find('span', {"class": "preco_desconto"}).find('strong').text
+        # if product is not available at Kabum, the only data used is the product name
+        product = set_sold_out(soup.find('h1', {"class": "titulo_det"}).text)
 
     return product
+
+
+def check_availability(soup):
+    available = soup.find('div', {'class': 'disponibilidade'}).find('img')['alt']
+    if available == 'produto_indisponivel':
+        return False
+    else:
+        return True
+
+
+def set_sold_out(product_name):
+    return {"product_name": product_name,
+            "price": 'SOLD OUT',
+            "price_cash": 'SOLD OUT'}
