@@ -6,12 +6,24 @@ def get_pichau(product_string):
     base_url = 'https://www.pichau.com.br/'
 
     http_return = requests.get(base_url + product_string)
-    soap = BeautifulSoup(http_return.content, 'lxml')
+    soup = BeautifulSoup(http_return.content, 'lxml')
 
     product = dict()
 
-    product["product_name"] = soap.find('div', {'class': 'product title'}).find('h1').text
-    product["price"] = soap.find('span', {'class': 'price'}).text
-    product["price_cash"] = str(soap.find('span', {'class': 'price-boleto'}).find('span').text).split(' ')[-1]
+    product["product_name"] = soup.find('div', {'class': 'product title'}).find('h1').text
+
+    if check_availability(soup):
+        product["price"] = soup.find('span', {'class': 'price'}).text
+        product["price_cash"] = str(soup.find('span', {'class': 'price-boleto'}).find('span').text).split(' ')[-1]
+    else:
+        product["price"] = 'SOLD OUT'
+        product["price_cash"] = 'SOLD OUT'
 
     return product
+
+
+def check_availability(soup):
+    if soup.find('div', {'class': 'stock unavailable'}):
+        return False
+    else:
+        return True
