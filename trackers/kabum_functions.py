@@ -35,8 +35,8 @@ def get_product_dict(soup):
     product_available = check_availability(soup)
 
     if product_available:
-        # If product is on sale, different HTML elements are used. If on sale contains div class "contTEXTO" else
-        # it's not.
+        # If product is on sale, different HTML elements are used. If on sale contains div class "contTEXTO"
+        # else it's not.
         if soup.find('div', {'class': 'contTEXTO'}):
             product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
             product["price"] = str(soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text).strip()
