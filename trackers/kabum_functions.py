@@ -39,12 +39,12 @@ def get_product_dict(soup):
         # it's not.
         if soup.find('div', {'class': 'contTEXTO'}):
             product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
-            product["price"] = soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text
-            product["price_cash"] = soup.find('span', {"class": "preco_desconto_avista-cm"}).text
+            product["price"] = str(soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text).strip()
+            product["price_cash"] = str(soup.find('span', {"class": "preco_desconto_avista-cm"}).text).strip()
         else:
             product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
             product["price"] = str(soup.find('div', {"class": "preco_normal"}).text).strip()
-            product["price_cash"] = soup.find('span', {"class": "preco_desconto"}).find('strong').text
+            product["price_cash"] = str(soup.find('span', {"class": "preco_desconto"}).find('strong').text).strip()
     else:
         # if product is not available at Kabum, the only data used is the product name
         product = set_sold_out(soup.find('h1', {"class": "titulo_det"}).text)
