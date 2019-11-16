@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello world</title>
+    <!--TODO developed new title-->
 </head>
+
 <body>
-{% if name %}
-  <h1>Hello {{ name }}!</h1>
-{% else %}
-  <h1>Hello, World!</h1>
-{% endif %}
+<!--TODO create table-->
+<!-- product_name(from any store) | pichau | kabum | terabyte (alphabetical?) | best current price  -->
+
+<p> {{name}}</p>
+{% for post in posts %}
+<div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+{% endfor %}
+
 </body>
 </html>

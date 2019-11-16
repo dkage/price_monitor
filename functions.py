@@ -29,3 +29,6 @@ def generate_prices_dict():
 
     return products_dicts
 
+
+# TODO create new function to check for best value and tag it (maybe call it on function generate?)
+# TODO example products_dicts[best] = [store, price, price_cash]
