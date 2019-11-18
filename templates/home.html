@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello world</title>
+    <title>Price Monitor</title>
     <style>
         table, th, td {
             border: 1px solid;
+            text-align: center;
+        }
+        td{
+            padding: 9px;
         }
     </style>
     <!--TODO developed new title-->
@@ -16,16 +20,31 @@
 <!-- product_name(from any store) | pichau | kabum | terabyte (alphabetical?) | best current price  -->
 <p>{{products_dict}}</p>
 <table>
+    <tbody>
     <tr>
-<th rowspan="2">Product</th>
-        <th colspan="3">Prices</th>
+        <td rowspan="2">Product name</td>
+        <td rowspan="2">Payment method </td>
+        <td colspan="3">Prices</td>
     </tr>
     <tr>
-
-        <th>Kabum</th>
-        <th>Terabyte</th>
-        <th>Pichau</th>
+        <td>KABUM</td>
+        <td>PICHAU</td>
+        <td>TERABYTE</td>
     </tr>
+    <tr>
+        <td rowspan="2"> CPU</td>
+        <td>CASH</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>Installments</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+    </tr>
+    </tbody>
 </table>
 
 </body>
