@@ -16,16 +16,20 @@ def generate_prices_dict():
 
     products_dicts = dict()
     return_dict = list
+    products = []
     for section in data.sections():
         products_dicts[section] = dict()
         for item in data.items(section):
+            products.append(item[0])
             if section == 'kabum':
                 return_dict = get_kabum(data.get(section, item[0]))
             if section == 'pichau':
                 return_dict = get_pichau(data.get(section, item[0]))
             if section == 'terabyte':
                 return_dict = get_terabyte(data.get(section, item[0]))
-            products_dicts[section][item[0]] = return_dict
+            products_dicts['store_prices'][section][item[0]] = return_dict
+
+    products_dicts['product_keys'] = set(products)
 
     return products_dicts
 
