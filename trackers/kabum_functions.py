@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from misc_functions import *
 
 
 def get_kabum(product_code):
@@ -66,9 +67,3 @@ def set_sold_out(product_name):
     return {"product_name": product_name,
             "price": 'SOLD OUT',
             "price_cash": 'SOLD OUT'}
-
-
-def clear_string(soup_price):
-    price_string = str(soup_price).replace(" ", "").replace("\n", "").replace("\t", "")
-
-    return price_string

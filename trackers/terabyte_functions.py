@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import re
 import requests
+from misc_functions import *
 
 
 def get_terabyte(product_string):
@@ -19,9 +20,9 @@ def get_terabyte(product_string):
     # As Terabyte website loads the prices on the fly, the script get the values using a REGEX directly from the
     # jquery calls to put the values inside the documents elements.
     product_prices = grab_from_jquery(soup.find_all('script'))
-    product["price_cash"] = product_prices[0][0]
-    product["price"] = product_prices[0][1]
-    product["installments"] = product_prices[1][0]
+    product["price_cash"] = clear_string(product_prices[0][0])
+    product["price"] = clear_string(product_prices[0][1])
+    product["installments"] = clear_string(product_prices[1][0])
 
     return product
 
