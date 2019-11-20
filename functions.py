@@ -18,7 +18,9 @@ def generate_prices_dict():
     products_dicts['store_prices'] = dict()
     return_dict = list
     products = []
+    stores = []
     for section in data.sections():
+        stores.append(section)
         products_dicts['store_prices'][section] = dict()
         for item in data.items(section):
             products.append(item[0])
@@ -31,6 +33,7 @@ def generate_prices_dict():
             products_dicts['store_prices'][section][item[0]] = return_dict
 
     products_dicts['product_keys'] = set(products)
+    products_dicts['stores'] = stores
 
     return products_dicts
 
