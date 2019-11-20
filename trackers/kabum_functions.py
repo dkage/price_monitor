@@ -68,7 +68,7 @@ def set_sold_out(product_name):
             "price_cash": 'SOLD OUT'}
 
 
-def clear_string (soup_price):
+def clear_string(soup_price):
     price_string = str(soup_price).replace(" ", "").replace("\n", "").replace("\t", "")
 
     return price_string
