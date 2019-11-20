@@ -15,10 +15,11 @@ def generate_prices_dict():
     data = get_ini()
 
     products_dicts = dict()
+    products_dicts['store_prices'] = dict()
     return_dict = list
     products = []
     for section in data.sections():
-        products_dicts[section] = dict()
+        products_dicts['store_prices'][section] = dict()
         for item in data.items(section):
             products.append(item[0])
             if section == 'kabum':
