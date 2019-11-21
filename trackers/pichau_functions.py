@@ -18,6 +18,7 @@ def get_pichau(product_string):
     else:
         product["price"] = 'SOLD OUT'
         product["price_cash"] = 'SOLD OUT'
+    product["installments"] = 'x10'  # TODO NEEDS TO BE TAKEN FROM SOUP, this decreases for low value products
 
     return product
 

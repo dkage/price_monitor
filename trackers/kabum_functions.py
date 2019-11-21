@@ -49,6 +49,7 @@ def get_product_dict(soup):
     else:
         # if product is not available at Kabum, the only data used is the product name
         product = set_sold_out(soup.find('h1', {"class": "titulo_det"}).text)
+    product["installments"] = "x3"
 
     return product
 
