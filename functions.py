@@ -38,5 +38,33 @@ def generate_prices_dict():
     return products_dicts
 
 
+def get_best_values(product_dict):
+
+    # Def encapsulated because it's only used inside this function
+    def get_best_price(prices_tuple_list):
+        clean_tuple_list = [((float(price_element.replace("R$", "").replace(".", "").replace(",", "."))), store_element)
+                            for price_element, store_element in prices_tuple_list]
+
+        best = min(clean_tuple_list, key=lambda x: x[0])
+
+        return best
+
+    best_values = dict()
+
+    for product in product_dict['product_keys']:
+        best_values[product] = dict()
+        cash_price = []  # Resets for each product
+        price = []  # Resets for each product
+        for store in product_dict['stores']:
+            if product_dict['store_prices'][store][product]['price_cash'] != "SOLD OUT":
+                cash_price.append([product_dict['store_prices'][store][product]['price_cash'], store])
+                price.append([product_dict['store_prices'][store][product]['price'], store])
+        best_price_cash = get_best_price(cash_price)
+        best_price = get_best_price(price)
+        best_values[product]['cash'] = best_price_cash
+        best_values[product]['price'] = best_price
+
+    return best_values
+
 # TODO create new function to check for best value and tag it (maybe call it on function generate?)
 # TODO example products_dicts[best] = [store, price, price_cash]
