@@ -65,6 +65,3 @@ def get_best_values(product_dict):
         best_values[product]['price'] = best_price
 
     return best_values
-
-# TODO create new function to check for best value and tag it (maybe call it on function generate?)
-# TODO example products_dicts[best] = [store, price, price_cash]
