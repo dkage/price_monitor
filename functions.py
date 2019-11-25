@@ -1,7 +1,5 @@
 import configparser
-from trackers.kabum_functions import *
-from trackers.terabyte_functions import *
-from trackers.pichau_functions import *
+from tracker.requester_all_stores import *
 
 
 def get_ini():
