@@ -10,7 +10,7 @@ def get_terabyte(product_string):
     http_return = requests.get(base_url + product_string)
     soup = BeautifulSoup(http_return.content, 'lxml')
 
-    product = check_availability(soup)
+    product = terabyte_check_availability(soup)
     product["product_name"] = soup.find('h1', {"class": "tit-prod"}).text
 
     # If product already has key price, that means that it was populated in check_availability(), so product is SOLD OUT
@@ -19,7 +19,7 @@ def get_terabyte(product_string):
 
     # As Terabyte website loads the prices on the fly, the script get the values using a REGEX directly from the
     # jquery calls to put the values inside the documents elements.
-    product_prices = grab_from_jquery(soup.find_all('script'))
+    product_prices = terabyte_grab_from_jquery(soup.find_all('script'))
     product["price_cash"] = clear_string(product_prices[0][0])
     product["price"] = clear_string(product_prices[0][1])
     product["installments"] = clear_string(product_prices[1][0])
@@ -27,7 +27,7 @@ def get_terabyte(product_string):
     return product
 
 
-def grab_from_jquery(script_soup):
+def terabyte_grab_from_jquery(script_soup):
     """
     Grabs prices directly from jquery
     :param: Beautiful object "soup" with all script tags inside get returned from url
@@ -41,7 +41,7 @@ def grab_from_jquery(script_soup):
     return prices
 
 
-def check_availability(soup):
+def terabyte_check_availability(soup):
     if soup.find('div', {'id': 'indisponivel'}):
         return {"price_cash": 'SOLD OUT',
                 "price": 'SOLD OUT',

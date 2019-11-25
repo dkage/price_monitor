@@ -28,12 +28,12 @@ def get_kabum(product_code):
         http_return = requests.get(url_redirect)
         soup = BeautifulSoup(http_return.content, 'lxml')
 
-    return get_product_dict(soup)
+    return kabum_get_product_dict(soup)
 
 
-def get_product_dict(soup):
+def kabum_get_product_dict(soup):
     product = dict()
-    product_available = check_availability(soup)
+    product_available = kabum_check_availability(soup)
 
     if product_available:
         # If product is on sale, different HTML elements are used. If on sale contains div class "contTEXTO"
@@ -48,13 +48,13 @@ def get_product_dict(soup):
             product["price_cash"] = clear_string(soup.find('span', {"class": "preco_desconto"}).find('strong').text)
     else:
         # if product is not available at Kabum, the only data used is the product name
-        product = set_sold_out(soup.find('h1', {"class": "titulo_det"}).text)
+        product = kabum_set_sold_out(soup.find('h1', {"class": "titulo_det"}).text)
     product["installments"] = "x3"
 
     return product
 
 
-def check_availability(soup):
+def kabum_check_availability(soup):
     if soup.find('div', {'id': 'contador-cm'}):  # if there is div called 'contador-cm' product is on sale, so available
         return True
     available = soup.find('div', {'class': 'disponibilidade'}).find('img')['alt']
@@ -64,7 +64,7 @@ def check_availability(soup):
         return True
 
 
-def set_sold_out(product_name):
+def kabum_set_sold_out(product_name):
     return {"product_name": product_name,
             "price": 'SOLD OUT',
             "price_cash": 'SOLD OUT'}

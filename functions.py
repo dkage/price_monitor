@@ -61,7 +61,6 @@ def get_best_values(product_dict):
                 price.append([product_dict['store_prices'][store][product]['price'], store])
         best_price_cash = get_best_price(cash_price)
         best_price = get_best_price(price)
-        # TODO add installment
         best_values[product]['cash'] = best_price_cash
         best_values[product]['price'] = best_price
 

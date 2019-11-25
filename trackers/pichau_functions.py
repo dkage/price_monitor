@@ -12,7 +12,7 @@ def get_pichau(product_string):
 
     product["product_name"] = soup.find('div', {'class': 'product title'}).find('h1').text
 
-    if check_availability(soup):
+    if pichau_check_availability(soup):
         product["price"] = soup.find('span', {'class': 'price'}).text
         product["price_cash"] = str(soup.find('span', {'class': 'price-boleto'}).find('span').text).split(' ')[-1]
     else:
@@ -23,7 +23,7 @@ def get_pichau(product_string):
     return product
 
 
-def check_availability(soup):
+def pichau_check_availability(soup):
     if soup.find('div', {'class': 'stock unavailable'}):
         return False
     else:
