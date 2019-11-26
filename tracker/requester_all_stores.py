@@ -129,7 +129,6 @@ def terabyte_grab_from_jquery(script_soup):
     :return: returns tuple, where first element contains [price_cash, price, price_for_max_installments] and second
              element contains [maximum_number_of_installments]
     """
-    prices = []
 
     prices = [re.findall(r'.*(R\$.*)\'', str(script_soup)), re.findall(r".*nParc'.*\('(.*)'", str(script_soup))]
 
