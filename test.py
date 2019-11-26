@@ -1,8 +1,8 @@
-import configparser
-# import re
 from functions import *
-import json
+import configparser
 import psycopg2.extras
+# import re
+import json
 
 
 products_dict = {
@@ -71,28 +71,8 @@ products_dict = {
 }
 
 
-def get_db_ini():
-    db_info = configparser.ConfigParser()
-    db_info.read_file(open('config/db_info.ini'))
-
-    return db_info
 
 
-db_connection_credentials = get_db_ini()
-connection = psycopg2.connect(database=db_connection_credentials.get('database_connection', 'database'),
-                              host=db_connection_credentials.get('database_connection', 'host'),
-                              port=db_connection_credentials.get('database_connection', 'port'),
-                              user=db_connection_credentials.get('database_connection', 'username'),
-                              password=db_connection_credentials.get('database_connection', 'password'))
-cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-cursor.execute("SELECT * FROM products;")
-fetched_array = cursor.fetchall()
-
-for item in fetched_array:
-
-    print(item['id'])
-    print(item['product_name'])
 
 
 

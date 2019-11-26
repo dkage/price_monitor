@@ -2,6 +2,7 @@ import configparser
 from tracker.requester_all_stores import *
 
 
+# TODO delete this sections
 def get_ini():
     ini_data = configparser.ConfigParser()
     ini_data.read_file(open('products.ini'))
@@ -36,6 +37,7 @@ def generate_prices_dict():
     return products_dicts
 
 
+# TODO needs refactoring
 def get_best_values(product_dict):
 
     # Def encapsulated because it's only used inside this function
@@ -63,3 +65,25 @@ def get_best_values(product_dict):
         best_values[product]['price'] = best_price
 
     return best_values
+
+
+def get_db_ini():
+    db_info = configparser.ConfigParser()
+    db_info.read_file(open('config/db_info.ini'))
+
+    return db_info
+
+
+def get_products_array():
+    db_connection_credentials = get_db_ini()
+    connection = psycopg2.connect(database=db_connection_credentials.get('database_connection', 'database'),
+                                  host=db_connection_credentials.get('database_connection', 'host'),
+                                  port=db_connection_credentials.get('database_connection', 'port'),
+                                  user=db_connection_credentials.get('database_connection', 'username'),
+                                  password=db_connection_credentials.get('database_connection', 'password'))
+    cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    cursor.execute("SELECT * FROM products;")
+    fetched_array = cursor.fetchall()
+
+    return fetched_array
