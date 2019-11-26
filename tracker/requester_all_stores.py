@@ -71,8 +71,6 @@ def kabum_set_sold_out(product_name):
             "price_cash": 'SOLD OUT'}
 
 
-
-
 def get_pichau(product_string):
     base_url = 'https://www.pichau.com.br/'
 
@@ -99,9 +97,6 @@ def pichau_check_availability(soup):
         return False
     else:
         return True
-
-
-
 
 
 def get_terabyte(product_string):
