@@ -11,9 +11,17 @@ def get_kabum(product_code):
     :return: dict with 3 indexes, 'product_name', 'price' for full prize and 'price_cash' for paying with boleto.
     """
 
+    print("KABUM Product")
     base_url = 'https://www.kabum.com.br/cgi-local/site/produtos/descricao_ofertas.cgi?codigo='
+    product_url = base_url + str(product_code)
 
-    http_return = requests.get(base_url + str(product_code))
+    print("Product FULL_URL generated: " + product_url)
+    print("Requesting now.")
+
+    http_return = requests.get(product_url)
+
+    print("Request finished, generating new soup!")
+
     soup = BeautifulSoup(http_return.content, 'lxml')
 
     # Initialize
@@ -26,7 +34,14 @@ def get_kabum(product_code):
             if 'url=' in tag.get('content'):
                 url_redirect = str(tag.get('content')).split('=', 1)[1]
 
+        print("Request received too small, trying second URL structure.")
+        print("New FULL_URL: " + url_redirect)
+        print("Requesting now.")
+
         http_return = requests.get(url_redirect)
+
+        print("Request finished, generating new soup!")
+
         soup = BeautifulSoup(http_return.content, 'lxml')
 
     return kabum_get_product_dict(soup)
@@ -58,6 +73,7 @@ def kabum_get_product_dict(soup):
 def kabum_check_availability(soup):
     if soup.find('div', {'id': 'contador-cm'}):  # if there is div called 'contador-cm' product is on sale, so available
         return True
+    print(soup)
     available = soup.find('div', {'class': 'disponibilidade'}).find('img')['alt']
     if available == 'produto_indisponivel':
         return False
