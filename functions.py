@@ -1,8 +1,9 @@
 import configparser
 from tracker.requester_all_stores import *
+import psycopg2.extras
 
 
-# TODO delete this sections
+# TODO delete this section
 def get_ini():
     ini_data = configparser.ConfigParser()
     ini_data.read_file(open('products.ini'))
