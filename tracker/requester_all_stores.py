@@ -73,7 +73,6 @@ def kabum_get_product_dict(soup):
 def kabum_check_availability(soup):
     if soup.find('div', {'id': 'contador-cm'}):  # if there is div called 'contador-cm' product is on sale, so available
         return True
-    print(soup)
     available = soup.find('div', {'class': 'disponibilidade'}).find('img')['alt']
     if available == 'produto_indisponivel':
         return False
