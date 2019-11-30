@@ -1,7 +1,7 @@
 from functions import *
 import configparser
 import psycopg2.extras
-# import re
+import re
 import json
 
 
@@ -70,9 +70,14 @@ products_dict = {
     'stores': ['pichau', 'kabum', 'terabyte']
 }
 
+products = get_products_array()
 
 
-
-
-
+for product in products:
+    pichau = get_pichau(product['link_pichau'])
+    terabyte = get_terabyte(product['link_terabyte'])
+    kabum = get_kabum(product['link_kabum'])
+    print(terabyte)
+    print(kabum)
+    print(pichau)
 
