@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import re
 import requests
-from misc_functions import *
+from tracker.tracker_functions import *
 
 
 def get_kabum(product_code):
