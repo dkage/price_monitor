@@ -1,0 +1,14 @@
+<html lang="en">
+    <head>
+      {% if title %}
+      <title>{{ title }} - Price Monitor</title>
+      {% else %}
+      <title>Price Monitor</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Price Monitor: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
