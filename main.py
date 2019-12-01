@@ -12,5 +12,7 @@ def home():
 
 if __name__ == "__main__":
     # products_dict = generate_prices_dict()
-    products_dict = 'test'
-    app.run(debug=True)
+    products = get_products_array()
+    print(products)
+
+    # app.run(debug=True)
