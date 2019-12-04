@@ -1,14 +1,26 @@
 <html lang="en">
 <head>
     {% if title %}
-        <title>{{ title }} - Price Monitor</title>
+    <title>{{ title }} - Price Monitor</title>
     {% else %}
-        <title>Price Monitor</title>
+    <title>Price Monitor</title>
     {% endif %}
 </head>
 <body>
 <div>Price Monitor: <a href="/index">Home</a></div>
 <hr>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
 {% block content %}{% endblock %}
+
 </body>
 </html>
