@@ -15,6 +15,7 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        print('Received login user {}'.format(form.username.data))
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
         return redirect('/index')
