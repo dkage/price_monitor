@@ -3,11 +3,16 @@ from app.flask_app import *
 from app.forms import *
 
 
+user = 'Test'
+
 @app.route('/')
 @app.route('/index')
 @app.route('/home')
 def index():
-    user = 'Danilo'
+    try:
+        global user
+    except NameError:
+        user = 'Danilo'
     return render_template("index.html", title="Home", user=user)
 
 
