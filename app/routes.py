@@ -8,7 +8,7 @@ from app.forms import *
 @app.route('/home')
 def index():
     user = 'Danilo'
-    return render_template("index.html", user=user)
+    return render_template("index.html", title="Home", user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
