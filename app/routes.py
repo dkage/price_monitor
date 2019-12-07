@@ -19,3 +19,12 @@ def login():
             form.username.data, form.remember_me.data))
         return redirect('/index')
     return render_template('login.html', title="Login test page", form=form)
+
+
+@app.route('/add_product', methods=['GET', 'POST'])
+def add_product():
+    form = NewProduct()
+    if form.validate_on_submit():
+        print(form.product_name)
+        # TODO return to function that adds to database
+    return render_template('product.html', title='Add new product to monitor', form=form)
