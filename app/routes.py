@@ -3,7 +3,8 @@ from app.flask_app import *
 from app.forms import *
 
 
-user = 'Test'
+user = 'Test'  # TODO remove placeholder
+
 
 @app.route('/')
 @app.route('/index')
@@ -14,6 +15,12 @@ def index():
     except NameError:
         user = 'Danilo'
     return render_template("index.html", title="Home", user=user)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -33,9 +40,3 @@ def add_product():
         print(form.product_name)
         # TODO return to function that adds to database
     return render_template('product.html', title='Add new product to monitor', form=form)
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
