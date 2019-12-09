@@ -4,13 +4,39 @@
     <h1>Add new product to database.</h1>
     <h4> * Products added here will be tracked and shown on home </h4>
     <form method="post">
-        {{ form.hidden_tags() }}
+        {{ form.hidden_tag() }}
 
         {{ form.product_name.label }} <br>
         {{ form.product_name }} <br>
 
+        <br>
 
+        {{ form.product_type.label }} <br>
+        {{ form.product_type }} <br>
 
+        <br>
+
+        {{ form.product_desc.label }} <br>
+        {{ form.product_desc }} <br>
+
+        <br>
+
+        {{ form.kabum_link.label }} <br>
+        {{ form.kabum_link }} <br>
+
+        <br>
+
+        {{ form.pichau_link.label }} <br>
+        {{ form.pichau_link }} <br>
+
+        <br>
+
+        {{ form.terabyte_link.label }} <br>
+        {{ form.terabyte_link }} <br>
+
+        <br>
+
+        <p>{{ form.submit() }}</p>
 
     </form>
 
