@@ -38,6 +38,5 @@ def login():
 def add_product():
     form = NewProduct()
     if form.validate_on_submit():
-        print(form.product_name)
-        # TODO return to function that adds to database
+        add_product_db(form)
     return render_template('add_product.html', title='Add new product to monitor', form=form)

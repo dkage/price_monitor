@@ -88,3 +88,8 @@ def get_products_array():
     fetched_array = cursor.fetchall()
 
     return fetched_array
+
+
+def add_product_db(form_post):
+    print(form_post.data)
+    return 0
