@@ -8,6 +8,7 @@
 </head>
 <body>
 <div>Price Monitor: <a href="/index">Home</a></div>
+<div>Add new product: <a href="/add_product">Add product to db</a></div>
 <hr>
 
 {% with messages = get_flashed_messages() %}
@@ -20,6 +21,7 @@
 {% endif %}
 {% endwith %}
 
+{# Display block content on extend call #}
 {% block content %}{% endblock %}
 
 </body>

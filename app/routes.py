@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, send_from_directory
 from app.flask_app import *
 from app.forms import *
+from functions import *
 
 
 user = 'Test'  # TODO remove placeholder
@@ -39,4 +40,4 @@ def add_product():
     if form.validate_on_submit():
         print(form.product_name)
         # TODO return to function that adds to database
-    return render_template('product.html', title='Add new product to monitor', form=form)
+    return render_template('add_product.html', title='Add new product to monitor', form=form)
