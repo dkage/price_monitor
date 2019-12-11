@@ -75,14 +75,20 @@ def get_db_ini():
     return db_info
 
 
-def get_products_array():
+def database_cursor():
     db_connection_credentials = get_db_ini()
     connection = psycopg2.connect(database=db_connection_credentials.get('database_connection', 'database'),
                                   host=db_connection_credentials.get('database_connection', 'host'),
                                   port=db_connection_credentials.get('database_connection', 'port'),
                                   user=db_connection_credentials.get('database_connection', 'username'),
                                   password=db_connection_credentials.get('database_connection', 'password'))
-    cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    connected_cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    return connected_cursor
+
+
+def get_products_array():
+    cursor = database_cursor()
 
     cursor.execute("SELECT * FROM products;")
     fetched_array = cursor.fetchall()
