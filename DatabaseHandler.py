@@ -24,3 +24,12 @@ class DatabaseHandler:
         fetched_array = self.cursor.fetchall()
 
         return fetched_array
+
+    def insert_new_product(self):
+        return 'ok'
+
+    def add_new_best_price(self):
+        return 'ok'
+
+    def update_product(self):
+        return 'ok'
