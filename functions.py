@@ -66,8 +66,3 @@ def get_best_values(product_dict):
         best_values[product]['price'] = best_price
 
     return best_values
-
-
-def add_product_db(form_post):
-    print(form_post.data)
-    return 0
