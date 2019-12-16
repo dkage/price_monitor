@@ -27,7 +27,12 @@ class DatabaseHandler:
         return fetched_array
 
     def add_new_product(self, form_data):
+        """
+        Function to add new products directly to database.
 
+        :param form_data: data submitted from user using the form add_product.html
+        :return: ok message # TODO improve return message
+        """
         # TODO add function to trim links string of not needed parts of URL
         self.cursor.execute("INSERT INTO products ("
                             "product_type, "
