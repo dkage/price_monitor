@@ -2,9 +2,11 @@ from flask import render_template, flash, redirect, send_from_directory
 from app.flask_app import *
 from app.forms import *
 from functions import *
+from DatabaseHandler import DatabaseHandler
 
 
 user = 'Test'  # TODO remove placeholder
+db_handler = DatabaseHandler()
 
 
 @app.route('/')
@@ -38,5 +40,5 @@ def login():
 def add_product():
     form = NewProduct()
     if form.validate_on_submit():
-        add_product_db(form)
+        db_handler.add_new_product(form.data)
     return render_template('add_product.html', title='Add new product to monitor', form=form)
