@@ -42,3 +42,18 @@ def add_product():
     if form.validate_on_submit():
         db_handler.add_new_product(form.data)
     return render_template('add_product.html', title='Add new product to monitor', form=form)
+
+
+@app.route('/edit_product')
+def edit_product():
+    return render_template('placeholder.html')
+
+
+@app.route('/list_products')
+def list_products():
+    return render_template('placeholder.html')
+
+
+@app.route('/prices_table')
+def prices_table():
+    return render_template('placeholder.html')
