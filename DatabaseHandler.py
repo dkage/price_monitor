@@ -4,6 +4,7 @@ from re import search
 
 
 class DatabaseHandler:
+
     def __init__(self):
         # Grab db connection string values
         db_info = configparser.ConfigParser()
@@ -20,9 +21,9 @@ class DatabaseHandler:
         connected_cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
         self.cursor = connected_cursor
 
-    def get_products_array(self):
+    def select_from_db(self, select_statement):
 
-        self.cursor.execute("SELECT * FROM products;")
+        self.cursor.execute(select_statement)
         fetched_array = self.cursor.fetchall()
 
         return fetched_array
@@ -53,6 +54,10 @@ class DatabaseHandler:
                             ))
 
         return 'ok'
+
+    def select_all_products(self):
+        sql = "SELECT * FROM products;"
+        return self.select_from_db(sql)
 
     def add_new_best_price(self):
         raise NotImplementedError("Need to be implemented")

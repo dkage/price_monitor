@@ -49,11 +49,12 @@ def edit_product():
     return render_template('placeholder.html')
 
 
-@app.route('/list_products')
-def list_products():
-    return render_template('placeholder.html')
-
-
 @app.route('/prices_table')
 def prices_table():
     return render_template('placeholder.html')
+
+
+@app.route('/product_list')
+def prices_table():
+    db_handler
+    return render_template('product_list.html')
