@@ -44,17 +44,18 @@ def add_product():
     return render_template('add_product.html', title='Add new product to monitor', form=form)
 
 
-@app.route('/edit_product')
-def edit_product():
-    return render_template('placeholder.html')
-
-
-@app.route('/prices_table')
-def prices_table():
-    return render_template('placeholder.html')
-
+# @app.route('/edit_product')
+# def edit_product():
+#     return render_template('placeholder.html')
+#
+#
+# @app.route('/prices_table')
+# def prices_table():
+#     return render_template('placeholder.html')
+#
 
 @app.route('/product_list')
 def prices_table():
-    db_handler
-    return render_template('product_list.html')
+    product_list = db_handler.select_all_products()
+
+    return render_template('product_list.html', list=product_list)
