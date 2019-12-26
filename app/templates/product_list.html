@@ -2,13 +2,34 @@
 
 {% block content %}
 
-    {% for product in list %}
+    <table>
+        <tbody>
+            <tr>
+                <td>Product ID</td>
+                <td>Product type</td>
+                <td>Product name</td>
+                <td>Product description</td>
+                <td>Kabum</td>
+                <td>Pichau</td>
+                <td>Terabyte</td>
+                <td>Date added</td>
+                <td>Edit link</td>
+            </tr>
 
-        {% for item in product %}
-            <p>{{ item[0] }}</p>
-            <br>
-        {% endfor %}
-
-    {% endfor %}
+            {% for product in list %}
+                    <tr>
+                        <td>{{ product[0] }}</td>
+                        <td>{{ product[1] }}</td>
+                        <td>{{ product[2] }}</td>
+                        <td>{{ product[3] }}</td>
+                        <td>{{ product[4] }}</td>
+                        <td>{{ product[5] }}</td>
+                        <td>{{ product[6] }}</td>
+                        <td>{{ product[7] }}</td>
+                        <td> <a href="edit_product?id={{ product[0] }}">Edit product</a></td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

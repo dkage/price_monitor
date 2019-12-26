@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, send_from_directory
+from flask import render_template, flash, redirect, send_from_directory, request
 from app.flask_app import *
 from app.forms import *
 from functions import *
@@ -44,15 +44,16 @@ def add_product():
     return render_template('add_product.html', title='Add new product to monitor', form=form)
 
 
-# @app.route('/edit_product')
-# def edit_product():
-#     return render_template('placeholder.html')
-#
+@app.route('/edit_product', methods=['GET', 'POST'])
+def edit_product():
+    print(request.args['id'])
+    return render_template('placeholder.html')
+
 #
 # @app.route('/prices_table')
 # def prices_table():
 #     return render_template('placeholder.html')
-#
+
 
 @app.route('/product_list')
 def prices_table():
