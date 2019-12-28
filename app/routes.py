@@ -5,7 +5,7 @@ from functions import *
 from DatabaseHandler import DatabaseHandler
 
 
-user = 'Test'  # TODO remove placeholder
+user = 'Danilo'  # TODO remove placeholder
 db_handler = DatabaseHandler()
 
 
@@ -46,7 +46,8 @@ def add_product():
 
 @app.route('/edit_product', methods=['GET', 'POST'])
 def edit_product():
-    print(request.args['id'])
+    id = request.args['id']
+
     return render_template('placeholder.html')
 
 #
