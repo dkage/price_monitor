@@ -59,6 +59,10 @@ class DatabaseHandler:
         sql = "SELECT * FROM products;"
         return self.select_from_db(sql)
 
+    def select_product_by_id(self, id):  #  TODO MERGE THIS AND ABOVE INTO ONE USING DEFAULT
+        sql = "SELECT * FROM products WHERE id = {}".format(id)
+        print(sql)
+
     def add_new_best_price(self):
         raise NotImplementedError("Need to be implemented")
 
