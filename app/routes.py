@@ -44,11 +44,16 @@ def add_product():
     return render_template('add_product.html', title='Add new product to monitor', form=form)
 
 
-@app.route('/edit_product', methods=['GET', 'POST'])
+@app.route('/edit_product', methods=['GET', 'POST'])  # TODO merge this with add product?
 def edit_product():
-    id = request.args['id']
+    form = NewProduct()
 
-    return render_template('placeholder.html')
+    product_data = db_handler.select_product_by_id(request.args['id'])[0]
+    print(product_data[2])
+    form.product_name.data = product_data[2]
+    # print(product_data['2'])
+
+    return render_template('edit_product.html', form=form, edit_product=product_data)
 
 #
 # @app.route('/prices_table')
