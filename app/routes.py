@@ -49,9 +49,14 @@ def edit_product():
     form = NewProduct()
 
     product_data = db_handler.select_product_by_id(request.args['id'])[0]
-    print(product_data[2])
+
+    # Fill form with database data
+    form.product_type.data = product_data[1]
     form.product_name.data = product_data[2]
-    # print(product_data['2'])
+    form.product_desc.data = product_data[3]
+    form.kabum_link.data = product_data[4]  # TODO add prefix URL
+    form.pichau_link.data = product_data[5]  # TODO add prefix URL
+    form.terabyte_link.data = product_data[6]  # TODO add prefix URL
 
     return render_template('edit_product.html', form=form, edit_product=product_data)
 
