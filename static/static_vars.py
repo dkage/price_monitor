@@ -1,0 +1,1 @@
+pichau_base_url = 'https://www.pichau.com.br/'
