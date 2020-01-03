@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, send_from_directory, request
 from app.flask_app import *
 from app.forms import *
+from static.static_vars import *
 from functions import *
 from DatabaseHandler import DatabaseHandler
 
@@ -54,9 +55,9 @@ def edit_product():
     form.product_type.data = product_data[1]
     form.product_name.data = product_data[2]
     form.product_desc.data = product_data[3]
-    form.kabum_link.data = product_data[4]  # TODO add prefix URL
-    form.pichau_link.data = product_data[5]  # TODO add prefix URL
-    form.terabyte_link.data = product_data[6]  # TODO add prefix URL
+    form.kabum_link.data = kabum_base_url + product_data[4]
+    form.pichau_link.data = pichau_base_url + product_data[5]
+    form.terabyte_link.data = terabyte_base_url + product_data[6]
 
     return render_template('edit_product.html', form=form, edit_product=product_data)
 
