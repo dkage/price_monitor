@@ -43,10 +43,13 @@ def add_or_edit_product():
 
     # If form data submitted, call database handler to put data in postgres
     if form.validate_on_submit():
-        db_handler.product_manager(form.data)
+        if 'id' in request.args:
+            db_handler.product_manager(form.data, request.args['id'])
+        else:
+            db_handler.product_manager(form.data)
     else:
         # If there is an ID parameter, it is editing an already existing product
-        if request.args['id']:
+        if 'id' in request.args:
 
             # grab product data on database
             product_data = db_handler.select_product_by_id(request.args['id'])[0]
@@ -66,7 +69,7 @@ def add_or_edit_product():
 def edit_product():
     form = NewProduct()
 
-    # product_data = db_handler.select_product_by_id(request.args['id'])[0]
+    product_data = db_handler.select_product_by_id(request.args['id'])[0]
     #
     # # Fill form with database data
     # form.product_type.data = product_data[1]

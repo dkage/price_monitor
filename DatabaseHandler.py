@@ -1,6 +1,7 @@
 import configparser
 import psycopg2.extras
 from re import search
+from static.static_vars import *
 
 
 class DatabaseHandler:
@@ -39,7 +40,24 @@ class DatabaseHandler:
         """
 
         if product_id:
-            print('this is and edit')
+            self.cursor.execute("UPDATE public.products "
+                                "SET product_type = %s, "
+                                "product_name = %s, "
+                                "product_description = %s, "
+                                "link_kabum = %s, "
+                                "link_pichau = %s, "
+                                "link_terabyte = %s "
+                                "WHERE id = %s;",
+                                (
+                                    form_data['product_type'],
+                                    form_data['product_name'],
+                                    form_data['product_desc'],
+                                    self.trim_link(form_data['kabum_link']),
+                                    self.trim_link(form_data['pichau_link']),
+                                    self.trim_link(form_data['terabyte_link']),
+                                    product_id
+                                ))
+
         else:
             # TODO add function to trim links string of not needed parts of URL
             self.cursor.execute("INSERT INTO products ("
@@ -54,9 +72,9 @@ class DatabaseHandler:
                                     form_data['product_type'],
                                     form_data['product_name'],
                                     form_data['product_desc'],
-                                    form_data['kabum_link'],
-                                    form_data['pichau_link'],
-                                    form_data['terabyte_link']
+                                    self.trim_link(form_data['kabum_link']),
+                                    self.trim_link(form_data['pichau_link']),
+                                    self.trim_link(form_data['terabyte_link'])
                                 ))
 
         return 'ok'
@@ -82,7 +100,7 @@ class DatabaseHandler:
         :param link_to_trim: URL to trim
         :return: only parts of that should go to database, removing parts that repeat for every product
         """
-
+        print(link_to_trim)
         if 'kabum' in link_to_trim:
             try:
                 trimmed_link = search(r"(\d{5,})", link_to_trim)[0]  # Grab only product code number
