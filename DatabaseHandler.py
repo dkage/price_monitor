@@ -29,30 +29,35 @@ class DatabaseHandler:
 
         return fetched_array
 
-    def add_new_product(self, form_data):
+    def product_manager(self, form_data, product_id=None):
         """
         Function to add new products directly to database.
 
-        :param form_data: data submitted from user using the form add_product.html
+        :param product_id: if editing an already
+        :param form_data: data submitted from user using the form product_editor.html
         :return: ok message # TODO improve return message
         """
-        # TODO add function to trim links string of not needed parts of URL
-        self.cursor.execute("INSERT INTO products ("
-                            "product_type, "
-                            "product_name, "
-                            "product_description,"
-                            "link_kabum, "
-                            "link_pichau, "
-                            "link_terabyte"
-                            ") VALUES (%s, %s, %s, %s, %s, %s)",
-                            (
-                                form_data['product_type'],
-                                form_data['product_name'],
-                                form_data['product_desc'],
-                                form_data['kabum_link'],
-                                form_data['pichau_link'],
-                                form_data['terabyte_link']
-                            ))
+
+        if product_id:
+            print('this is and edit')
+        else:
+            # TODO add function to trim links string of not needed parts of URL
+            self.cursor.execute("INSERT INTO products ("
+                                "product_type, "
+                                "product_name, "
+                                "product_description,"
+                                "link_kabum, "
+                                "link_pichau, "
+                                "link_terabyte"
+                                ") VALUES (%s, %s, %s, %s, %s, %s)",
+                                (
+                                    form_data['product_type'],
+                                    form_data['product_name'],
+                                    form_data['product_desc'],
+                                    form_data['kabum_link'],
+                                    form_data['pichau_link'],
+                                    form_data['terabyte_link']
+                                ))
 
         return 'ok'
 

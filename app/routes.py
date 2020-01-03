@@ -37,27 +37,44 @@ def login():
     return render_template('login.html', title="Login test page", form=form)
 
 
-@app.route('/add_product', methods=['GET', 'POST'])
-def add_product():
+@app.route('/product_editor', methods=['GET', 'POST'])
+def add_or_edit_product():
     form = NewProduct()
+
+    # If form data submitted, call database handler to put data in postgres
     if form.validate_on_submit():
-        db_handler.add_new_product(form.data)
-    return render_template('add_product.html', title='Add new product to monitor', form=form)
+        db_handler.product_manager(form.data)
+    else:
+        # If there is an ID parameter, it is editing an already existing product
+        if request.args['id']:
+
+            # grab product data on database
+            product_data = db_handler.select_product_by_id(request.args['id'])[0]
+
+            # Fill form with database data
+            form.product_type.data = product_data[1]
+            form.product_name.data = product_data[2]
+            form.product_desc.data = product_data[3]
+            form.kabum_link.data = kabum_base_url + product_data[4]
+            form.pichau_link.data = pichau_base_url + product_data[5]
+            form.terabyte_link.data = terabyte_base_url + product_data[6]
+
+    return render_template('product_editor.html', title='Add new product to monitor', form=form)
 
 
 @app.route('/edit_product', methods=['GET', 'POST'])  # TODO merge this with add product?
 def edit_product():
     form = NewProduct()
 
-    product_data = db_handler.select_product_by_id(request.args['id'])[0]
-
-    # Fill form with database data
-    form.product_type.data = product_data[1]
-    form.product_name.data = product_data[2]
-    form.product_desc.data = product_data[3]
-    form.kabum_link.data = kabum_base_url + product_data[4]
-    form.pichau_link.data = pichau_base_url + product_data[5]
-    form.terabyte_link.data = terabyte_base_url + product_data[6]
+    # product_data = db_handler.select_product_by_id(request.args['id'])[0]
+    #
+    # # Fill form with database data
+    # form.product_type.data = product_data[1]
+    # form.product_name.data = product_data[2]
+    # form.product_desc.data = product_data[3]
+    # form.kabum_link.data = kabum_base_url + product_data[4]
+    # form.pichau_link.data = pichau_base_url + product_data[5]
+    # form.terabyte_link.data = terabyte_base_url + product_data[6]
 
     return render_template('edit_product.html', form=form, edit_product=product_data)
 
