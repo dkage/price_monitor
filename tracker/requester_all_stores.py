@@ -1,3 +1,4 @@
+from static.static_vars import *
 from bs4 import BeautifulSoup
 import re
 import requests
@@ -12,8 +13,7 @@ def get_kabum(product_code):
     """
 
     print("KABUM Product")
-    base_url = 'https://www.kabum.com.br/cgi-local/site/produtos/descricao_ofertas.cgi?codigo='
-    product_url = base_url + str(product_code)
+    product_url = kabum_base_url + str(product_code)
 
     print("Product FULL_URL generated: " + product_url)
     print("Requesting now.")
@@ -87,9 +87,8 @@ def kabum_set_sold_out(product_name):
 
 
 def get_pichau(product_string):
-    base_url = 'https://www.pichau.com.br/'
 
-    http_return = requests.get(base_url + product_string)
+    http_return = requests.get(pichau_base_url + product_string)
     soup = BeautifulSoup(http_return.content, 'lxml')
 
     product = dict()
@@ -115,9 +114,8 @@ def pichau_check_availability(soup):
 
 
 def get_terabyte(product_string):
-    base_url = 'https://www.terabyteshop.com.br/produto/'
 
-    http_return = requests.get(base_url + product_string)
+    http_return = requests.get(terabyte_base_url + product_string)
     soup = BeautifulSoup(http_return.content, 'lxml')
 
     product = terabyte_check_availability(soup)
