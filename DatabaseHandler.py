@@ -84,13 +84,14 @@ class DatabaseHandler:
         """
 
         if 'kabum' in link_to_trim:
-            trimmed_link = search(r"(\d{5,})", link_to_trim)[0]  # Grab only product code number
+            try:
+                trimmed_link = search(r"(\d{5,})", link_to_trim)[0]  # Grab only product code number
+            except TypeError:
+                trimmed_link = 'Invalid link given.'
         elif 'pichau' in link_to_trim:
-            base_url = 'https://www.pichau.com.br/'
-            trimmed_link = link_to_trim.replace(base_url, '')
+            trimmed_link = link_to_trim.replace(pichau_base_url, '')
         elif 'terabyte' in link_to_trim:
-            base_url = 'https://www.terabyteshop.com.br/produto/'
-            trimmed_link = link_to_trim.replace(base_url, '')
+            trimmed_link = link_to_trim.replace(terabyte_base_url, '')
         else:
             trimmed_link = 'Invalid link given.'
 
