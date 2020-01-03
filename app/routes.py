@@ -52,7 +52,7 @@ def add_or_edit_product():
         if 'id' in request.args:
 
             # grab product data on database
-            product_data = db_handler.select_product_by_id(request.args['id'])[0]
+            product_data = db_handler.select_product_by_id(request.args['id'])[0]  # TODO add handling for invalid ID
 
             # Fill form with database data
             form.product_type.data = product_data[1]
