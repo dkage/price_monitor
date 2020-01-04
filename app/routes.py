@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, send_from_directory, request
+from flask import render_template, flash, redirect, send_from_directory, request, url_for
 from app.flask_app import *
 from app.forms import *
 from static.static_vars import *
@@ -46,9 +46,11 @@ def add_or_edit_product():
         # If contains ID already, it is passed as an argument in a product EDIT
         if 'id' in request.args:
             db_handler.product_manager(form.data, request.args['id'])
+            return redirect(url_for('index'), code=300)
         # Else it adds new product do database table
         else:
             db_handler.product_manager(form.data)
+            return redirect(url_for('index'), code=300)
     else:
         # If there is an ID parameter, it is editing an already existing product
         if 'id' in request.args:
