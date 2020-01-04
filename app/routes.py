@@ -65,22 +65,6 @@ def add_or_edit_product():
     return render_template('product_editor.html', title='Add new product to monitor', form=form)
 
 
-@app.route('/edit_product', methods=['GET', 'POST'])  # TODO merge this with add product?
-def edit_product():
-    form = NewProduct()
-
-    product_data = db_handler.select_product_by_id(request.args['id'])[0]
-    #
-    # # Fill form with database data
-    # form.product_type.data = product_data[1]
-    # form.product_name.data = product_data[2]
-    # form.product_desc.data = product_data[3]
-    # form.kabum_link.data = kabum_base_url + product_data[4]
-    # form.pichau_link.data = pichau_base_url + product_data[5]
-    # form.terabyte_link.data = terabyte_base_url + product_data[6]
-
-    return render_template('edit_product.html', form=form, edit_product=product_data)
-
 #
 # @app.route('/prices_table')
 # def prices_table():
