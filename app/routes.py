@@ -73,10 +73,18 @@ def add_or_edit_product():
     return render_template('product_editor.html', title='Add new product to monitor', form=form)
 
 
-@app.route('/delete_product')
+@app.route('/delete_product', methods=['GET', 'POST'])
 def delete_product():
-    return 'test'
+    product_id = request.args['id']
 
+    if product_id:
+        db_call = db_handler.delete_product(product_id)
+    else:
+        return render_template('not_found.html')
+
+    if db_call[0] == 'error':
+        return render_template('error.html')
+    return render_template('success.html')
 
 
 @app.route('/product_list')

@@ -93,6 +93,18 @@ class DatabaseHandler:
     def update_product(self):
         raise NotImplementedError("Need to be implemented")
 
+    def delete_product(self, product_id=None):
+        if product_id is None:
+            return ['error', 'ID not passed']
+
+        exists = self.select_product_by_id(product_id)
+        if not exists:
+            return ['error', 'ID does not exist in database']
+
+        print(self.cursor.execute('DELETE FROM products WHERE id = %s', product_id))
+
+        return ['success', 'Entry successfully deleted']
+
     @staticmethod
     def trim_link(link_to_trim):
         """
