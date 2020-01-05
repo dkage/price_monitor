@@ -56,15 +56,19 @@ def add_or_edit_product():
         if 'id' in request.args:
 
             # grab product data on database
-            product_data = db_handler.select_product_by_id(request.args['id'])[0]  # TODO add handling for invalid ID
-
-            # Fill form with database data
-            form.product_type.data = product_data[1]
-            form.product_name.data = product_data[2]
-            form.product_desc.data = product_data[3]
-            form.kabum_link.data = kabum_base_url + product_data[4]
-            form.pichau_link.data = pichau_base_url + product_data[5]
-            form.terabyte_link.data = terabyte_base_url + product_data[6]
+            product_data = db_handler.select_product_by_id(request.args['id'])
+            print(product_data)
+            if not product_data:
+                return render_template('not_found.html', title='Product not found', id=request.args['id'])
+            else:
+                product_data = product_data[0]
+                # Fill form with database data
+                form.product_type.data = product_data[1]
+                form.product_name.data = product_data[2]
+                form.product_desc.data = product_data[3]
+                form.kabum_link.data = kabum_base_url + product_data[4]
+                form.pichau_link.data = pichau_base_url + product_data[5]
+                form.terabyte_link.data = terabyte_base_url + product_data[6]
 
     return render_template('product_editor.html', title='Add new product to monitor', form=form)
 
