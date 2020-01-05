@@ -69,10 +69,10 @@ def add_or_edit_product():
     return render_template('product_editor.html', title='Add new product to monitor', form=form)
 
 
-#
-# @app.route('/prices_table')
-# def prices_table():
-#     return render_template('placeholder.html')
+@app.route('/delete_product')
+def delete_product():
+    return 'test'
+
 
 
 @app.route('/product_list')
