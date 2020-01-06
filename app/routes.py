@@ -83,8 +83,8 @@ def delete_product():
         return render_template('not_found.html')
 
     if db_call[0] == 'error':
-        return render_template('error.html')
-    return render_template('success.html')
+        return render_template('error.html', message=db_call[1])
+    return render_template('success_delete.html', message=db_call[1])
 
 
 @app.route('/product_list')
