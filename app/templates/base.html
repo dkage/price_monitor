@@ -10,17 +10,18 @@
     <div>Price Monitor: <a href="/index">Home</a></div>
     <div>New product: <a href="/product_editor">Product editor</a></div>
     <div>List of registered products: <a href="/product_list">List</a></div>
-<hr>
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
+    <hr>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
 
 {# Display block content on extend call #}
 {% block content %}{% endblock %}
