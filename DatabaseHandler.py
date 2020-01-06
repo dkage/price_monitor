@@ -101,7 +101,7 @@ class DatabaseHandler:
         if not exists:
             return ['error', 'ID does not exist in database']
 
-        print(self.cursor.execute('DELETE FROM products WHERE id = %s', product_id))
+        self.cursor.execute('DELETE FROM products WHERE id = %s', (product_id,))
 
         return ['success', 'Entry successfully deleted']
 
