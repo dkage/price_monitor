@@ -91,4 +91,5 @@ def delete_product():
 def prices_table():
     product_list = db_handler.select_all_products()
 
-    return render_template('product_list.html', list=product_list)
+    return render_template('product_list.html', list=product_list, kabum=kabum_base_url, pichau=pichau_base_url,
+                           terabyte=terabyte_base_url)
