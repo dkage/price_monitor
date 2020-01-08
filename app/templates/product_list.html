@@ -19,14 +19,35 @@
 
             {% for product in list %}
                     <tr>
-                        <td>{{ product[0] }}</td>
-                        <td>{{ product[1] }}</td>
-                        <td>{{ product[2] }}</td>
-                        <td>{{ product[3] }}</td>
-                        <td>{{ product[4] }}</td>
-                        <td>{{ product[5] }}</td>
-                        <td>{{ product[6] }}</td>
-                        <td>{{ product[7] }}</td>
+                        <td>{{ product[0] }}</td>   {# Product ID #}
+                        <td>{{ product[1] }}</td>   {# Product type #}
+                        <td>{{ product[2] }}</td>   {# Product name #}
+                        <td>{{ product[3] }}</td>   {# Product description #}
+                        {% if product[4] != 'Invalid link given.' %}
+                            <td><a href="{{ kabum    ~ product[4] }}">link</a></td>   {# Kabum #}
+                        {% else %}
+                            <td>Not given</td>
+                        {% endif %}
+
+                        {% if product[5] != 'Invalid link given.' %}
+                            <td><a href="{{ pichau   ~ product[5] }}">link</a></td>   {# Pichau #}
+                        {% else %}
+                            <td>Not given</td>
+                        {% endif %}
+
+                        {% if product[6] != 'Invalid link given.' %}
+                            <td><a href="{{ pichau   ~ product[5] }}">link</a></td>   {# Pichau #}
+                        {% else %}
+                            <td>Not given</td>
+                        {% endif %}
+
+                        {% if product[5] != 'Invalid link given.' %}
+                            <td><a href="{{ terabyte ~ product[6] }}">link</a></td>   {# Terabyte #}
+                        {% else %}
+                            <td>Not given</td>
+                        {% endif %}
+
+                        <td>{{ product[7] }}</td>   {# Date #}
                         <td> <a href="edit_product?id={{ product[0] }}">Edit product</a></td>
                         <td> <a href="delete_product?id={{ product[0] }}">Delete</a></td>
                     </tr>
