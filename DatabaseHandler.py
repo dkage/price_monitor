@@ -80,7 +80,7 @@ class DatabaseHandler:
         return 'ok'
 
     def select_all_products(self):
-        sql = "SELECT * FROM products;"
+        sql = "SELECT * FROM products ORDER BY id;"
         return self.select_from_db(sql)
 
     def select_product_by_id(self, product_id):  # TODO MERGE THIS AND ABOVE INTO ONE USING DEFAULT
