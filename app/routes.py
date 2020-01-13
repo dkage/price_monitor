@@ -46,11 +46,11 @@ def add_or_edit_product():
         # If contains ID already, it is passed as an argument in a product EDIT
         if 'id' in request.args:
             db_handler.product_manager(form.data, request.args['id'])
-            return redirect(url_for('index'), code=300)
+            return redirect(url_for('index'), 302)
         # Else it adds new product do database table
         else:
             db_handler.product_manager(form.data)
-            return redirect(url_for('index'), code=300)
+            return redirect(url_for('index'), 302)
     else:
         # If there is an ID parameter, it is editing an already existing product
         if 'id' in request.args:
