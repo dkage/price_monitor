@@ -1,0 +1,11 @@
+# Product array structure
+
+0  = ID
+1  = Type
+2  = Name
+3  = Description
+4  = Kabum_link
+5  = Pichau_link
+6  = Terabyte_link
+7  = date added
+
