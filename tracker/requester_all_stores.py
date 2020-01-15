@@ -56,12 +56,12 @@ def kabum_get_product_dict(soup):
         # else it's not.
         if soup.find('div', {'class': 'contTEXTO'}):
             product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
-            product["price"] = clear_string(soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text)
-            product["price_cash"] = clear_string(soup.find('span', {"class": "preco_desconto_avista-cm"}).text)
+            product["price"] = only_numbers(soup.find('div', {"class": "preco_desconto-cm"}).find('strong').text)
+            product["price_cash"] = only_numbers(soup.find('span', {"class": "preco_desconto_avista-cm"}).text)
         else:
             product["product_name"] = soup.find('h1', {"class": "titulo_det"}).text
-            product["price"] = clear_string(soup.find('div', {"class": "preco_normal"}).text)
-            product["price_cash"] = clear_string(soup.find('span', {"class": "preco_desconto"}).find('strong').text)
+            product["price"] = only_numbers(soup.find('div', {"class": "preco_normal"}).text)
+            product["price_cash"] = only_numbers(soup.find('span', {"class": "preco_desconto"}).find('strong').text)
     else:
         # if product is not available at Kabum, the only data used is the product name
         product = kabum_set_sold_out(soup.find('h1', {"class": "titulo_det"}).text)
@@ -128,8 +128,8 @@ def get_terabyte(product_string):
     # As Terabyte website loads the prices on the fly, the script get the values using a REGEX directly from the
     # jquery calls to put the values inside the documents elements.
     product_prices = terabyte_grab_from_jquery(soup.find_all('script'))
-    product["price_cash"] = clear_string(product_prices[0][0])
-    product["price"] = clear_string(product_prices[0][1])
+    product["price_cash"] = only_numbers(product_prices[0][0])
+    product["price"] = only_numbers(product_prices[0][1])
     product["installments"] = clear_string(product_prices[1][0])
 
     return product
