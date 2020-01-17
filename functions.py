@@ -1,68 +1,52 @@
 import configparser
+from DatabaseHandler import DatabaseHandler
 from tracker.requester_all_stores import *
 import psycopg2.extras
 
 
-# TODO delete this section
-def get_ini():
-    ini_data = configparser.ConfigParser()
-    ini_data.read_file(open('products.ini'))
-
-    return ini_data
-
-
-def generate_prices_dict():
-    data = get_ini()
-
-    products_dicts = dict()
-    products_dicts['store_prices'] = dict()
-    return_dict = list
-    products = []
-    stores = []
-    for section in data.sections():
-        stores.append(section)
-        products_dicts['store_prices'][section] = dict()
-        for item in data.items(section):
-            products.append(item[0])
-            if section == 'kabum':
-                return_dict = get_kabum(data.get(section, item[0]))
-            if section == 'pichau':
-                return_dict = get_pichau(data.get(section, item[0]))
-            if section == 'terabyte':
-                return_dict = get_terabyte(data.get(section, item[0]))
-            products_dicts['store_prices'][section][item[0]] = return_dict
-
-    products_dicts['product_keys'] = set(products)
-    products_dicts['stores'] = stores
-
-    return products_dicts
+def link_valid(link):
+    if link == 'Invalid link given.':
+        return False
+    else:
+        return True
 
 
-# TODO needs refactoring
-def get_best_values(product_dict):
+def get_best_values():
 
-    # Def encapsulated because it's only used inside this function
-    def get_best_price(prices_tuple_list):
-        clean_tuple_list = [((float(price_element.replace("R$", "").replace(".", "").replace(",", "."))), store_element)
-                            for price_element, store_element in prices_tuple_list]
+    db_handler = DatabaseHandler()
 
-        best = min(clean_tuple_list, key=lambda x: x[0])
+    products = db_handler.select_all_products()
+    prices_array = []
 
-        return best
+    for product in products:
+        product_scrap = dict()
+        print(product)
+        print('Looking for product ID: {}'.format(product[0]))
+        print('Name: {}'.format(product[2]))
 
-    best_values = dict()
+        kabum_price = get_kabum(product[4]) if link_valid(product[4]) else 'Does not sell'
+        pichau_price = get_pichau(product[5]) if link_valid(product[4]) else 'Does not sell'
+        terabyte_price = get_terabyte(product[6]) if link_valid(product[4]) else 'Does not sell'
 
-    for product in product_dict['product_keys']:
-        best_values[product] = dict()
-        cash_price = []  # Resets for each product
-        price = []  # Resets for each product
-        for store in product_dict['stores']:
-            if product_dict['store_prices'][store][product]['price_cash'] != "SOLD OUT":
-                cash_price.append([product_dict['store_prices'][store][product]['price_cash'], store])
-                price.append([product_dict['store_prices'][store][product]['price'], store])
-        best_price_cash = get_best_price(cash_price)
-        best_price = get_best_price(price)
-        best_values[product]['cash'] = best_price_cash
-        best_values[product]['price'] = best_price
+        product_scrap['id'] = product[0]
+        product_scrap['kabum'] = kabum_price
+        product_scrap['pichau'] = pichau_price
+        product_scrap['terabyte'] = terabyte_price
 
-    return best_values
+        prices_array.append(product_scrap)
+
+    for item in prices_array:
+
+        price_tuples = []
+        for store in stores_analyzed:
+            if item[store]['price_cash'] != 'SOLD OUT' or 'Does not sell':
+                price_tuples.append([item[store]['price_cash'], store])
+
+        best_price = min(price_tuples, key=lambda x: x[0])
+
+        print(item['id'])
+        print(item['kabum']['product_name'])
+        print(price_tuples)
+        print(best_price)
+
+    return best_price
