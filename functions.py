@@ -48,5 +48,5 @@ def get_best_values():
         print(item['kabum']['product_name'])
         print(price_tuples)
         print(best_price)
-
+    # TODO add function to put prices on Database
     return best_price
