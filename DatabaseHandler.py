@@ -105,6 +105,9 @@ class DatabaseHandler:
 
         return ['success', 'Entry successfully deleted']
 
+    def insert_best_price(self, best_price_tuple):
+        return 'placeholder'
+
     @staticmethod
     def trim_link(link_to_trim):
         """
