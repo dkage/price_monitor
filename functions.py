@@ -44,9 +44,14 @@ def get_best_values():
 
         best_price = min(price_tuples, key=lambda x: x[0])
 
-        print(item['id'])
-        print(item['kabum']['product_name'])
-        print(price_tuples)
-        print(best_price)
-    # TODO add function to put prices on Database
+        best_price_store = best_price[1]
+
+        # print(item['id'])
+        # print(item['kabum']['product_name'])
+        # print(price_tuples)
+        # print(best_price)
+        # print(best_price_store)
+
+        db_handler.insert_best_price(item[best_price_store])
+
     return best_price
