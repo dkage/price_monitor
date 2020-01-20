@@ -105,7 +105,17 @@ class DatabaseHandler:
 
         return ['success', 'Entry successfully deleted']
 
-    def insert_best_price(self, best_price_tuple):
+    def insert_best_price(self, product_id, best_price_dict):
+        """
+        This function is the only one that is gonna interact with best_prices table, no update will be done on the rows,
+        that way it is possible to store the history of product price. Always add new best.
+
+        :param product_id: id of product in table 'products'
+        :param best_price_dict: contains data got from scraper, product name, price, price in cash, and installments
+        :return: 'ok'
+        """
+
+
         return 'placeholder'
 
     @staticmethod
