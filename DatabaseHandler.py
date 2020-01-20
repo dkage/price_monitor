@@ -102,6 +102,15 @@ class DatabaseHandler:
 
         return ['success', 'Entry successfully deleted']
 
+    def grab_best_price(self, product_id):
+        query = "SELECT price FROM best_prices WHERE id_product = {}".format(product_id)
+
+        current_best_price = self.select_from_db(query)[0][0]  # First row, and first element
+        if not current_best_price:
+            return 0
+        else:
+            return current_best_price
+
     def insert_best_price(self, product_id, best_price_dict):
         """
         This function is the only one that is gonna interact with best_prices table, no update will be done on the rows,
