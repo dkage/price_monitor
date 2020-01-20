@@ -87,9 +87,6 @@ class DatabaseHandler:
         sql = "SELECT * FROM products WHERE id = {}".format(product_id)
         return self.select_from_db(sql)
 
-    def add_new_best_price(self):
-        raise NotImplementedError("Need to be implemented")
-
     def update_product(self):
         raise NotImplementedError("Need to be implemented")
 
