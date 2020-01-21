@@ -19,7 +19,7 @@ def get_best_values():
     prices_array = []
 
     for product in products:
-        product_scrap = dict()
+        price_array_element = dict()
         print(product)
         print('Looking for product ID: {}'.format(product[0]))
         print('Name: {}'.format(product[2]))
@@ -28,30 +28,37 @@ def get_best_values():
         pichau_price = get_pichau(product[5]) if link_valid(product[4]) else 'Does not sell'
         terabyte_price = get_terabyte(product[6]) if link_valid(product[4]) else 'Does not sell'
 
-        product_scrap['id'] = product[0]
-        product_scrap['kabum'] = kabum_price
-        product_scrap['pichau'] = pichau_price
-        product_scrap['terabyte'] = terabyte_price
+        price_array_element['id'] = product[0]
+        price_array_element['kabum'] = kabum_price
+        price_array_element['pichau'] = pichau_price
+        price_array_element['terabyte'] = terabyte_price
 
-        prices_array.append(product_scrap)
+        prices_array.append(price_array_element)
 
-    for item in prices_array:
+    for scraped_product_info in prices_array:
+        print('\n\n\n')
+        print('Now checking product {}'.format(scraped_product_info))
 
         price_tuples = []
         for store in stores_analyzed:
-            if item[store]['price_cash'] != 'SOLD OUT' or 'Does not sell':
-                price_tuples.append([item[store]['price_cash'], store])
+            if scraped_product_info[store]['price_cash'] != 'SOLD OUT' or 'Does not sell':
+                price_tuples.append([scraped_product_info[store]['price_cash'], store])
+        print(price_tuples)
+        # If not a single store sells or is sold out in every one, jumps to next item
+        if not price_tuples:
+            continue
 
-        best_price = min(price_tuples, key=lambda x: x[0])
+        # Grabs lowest value inside the tuples list
+        best_price_tuple = min(price_tuples, key=lambda x: x[0])
+        current_best_price = best_price_tuple[0]
+        current_best_price_store = best_price_tuple[1]
 
-        best_price_store = best_price[1]
+        # Grabs from DB last best price of product ID
+        last_best_price = db_handler.grab_best_price(scraped_product_info['id'])
 
-        # print(item['id'])
-        # print(item['kabum']['product_name'])
-        # print(price_tuples)
-        # print(best_price)
-        # print(best_price_store)
+        if float(current_best_price) < float(last_best_price) or float(last_best_price) == 0:
+            # Insert prices into db
+            db_handler.insert_best_price(scraped_product_info['id'], scraped_product_info[current_best_price_store],
+                                         current_best_price_store)
 
-        db_handler.insert_best_price(item[best_price_store])
-
-    return best_price
+    return 'test'
