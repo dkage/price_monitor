@@ -103,7 +103,7 @@ class DatabaseHandler:
         return ['success', 'Entry successfully deleted']
 
     def grab_best_price(self, product_id):
-        query = "SELECT price FROM best_prices WHERE id_product = {}".format(product_id)
+        query = "SELECT price FROM best_prices WHERE id_product = {} ORDER BY date DESC".format(product_id)
 
         db_return = self.select_from_db(query)
         if not db_return:
