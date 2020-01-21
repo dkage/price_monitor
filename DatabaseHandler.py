@@ -112,7 +112,7 @@ class DatabaseHandler:
             current_best_price = db_return[0][0]  # First row, and first element
             return current_best_price
 
-    def insert_best_price(self, product_id, best_price_dict):
+    def insert_best_price(self, product_id, best_price_dict, store):
         """
         This function is the only one that is gonna interact with best_prices table, no update will be done on the rows,
         that way it is possible to store the history of product price. Always add new best.
@@ -121,9 +121,29 @@ class DatabaseHandler:
         :param best_price_dict: contains data got from scraper, product name, price, price in cash, and installments
         :return: 'ok'
         """
+        print('new best price')
+        print(product_id)
+        print(best_price_dict)
 
+        db_return = self.cursor.execute("INSERT INTO best_prices ("
+                                            "id_product, "
+                                            "price, "
+                                            "price_cash,"
+                                            "installments, "
+                                            "store"
+                                            ") VALUES (%s, %s, %s, %s, %s)",
+                                            (
+                                                product_id,
+                                                float(best_price_dict['price']),
+                                                float(best_price_dict['price_cash']),
+                                                best_price_dict['installments'],
+                                                store
+                                            ))
+        if not db_return:
+            return 'placeholder'
+        else:
+            return Exception
 
-        return 'placeholder'
 
     @staticmethod
     def trim_link(link_to_trim):
