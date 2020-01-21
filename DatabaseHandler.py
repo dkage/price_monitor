@@ -105,10 +105,11 @@ class DatabaseHandler:
     def grab_best_price(self, product_id):
         query = "SELECT price FROM best_prices WHERE id_product = {}".format(product_id)
 
-        current_best_price = self.select_from_db(query)[0][0]  # First row, and first element
-        if not current_best_price:
+        db_return = self.select_from_db(query)
+        if not db_return:
             return 0
         else:
+            current_best_price = db_return[0][0]  # First row, and first element
             return current_best_price
 
     def insert_best_price(self, product_id, best_price_dict):
