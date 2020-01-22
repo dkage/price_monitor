@@ -96,8 +96,9 @@ def get_pichau(product_string):
     product["product_name"] = soup.find('div', {'class': 'product title'}).find('h1').text
 
     if pichau_check_availability(soup):
-        product["price"] = soup.find('span', {'class': 'price'}).text
-        product["price_cash"] = str(soup.find('span', {'class': 'price-boleto'}).find('span').text).split(' ')[-1]
+        product["price"] = only_numbers(soup.find('span', {'class': 'price'}).text)
+        product["price_cash"] = only_numbers(str(soup.find('span', {'class': 'price-boleto'}).
+                                                 find('span').text).split(' ')[-1])
     else:
         product["price"] = 'SOLD OUT'
         product["price_cash"] = 'SOLD OUT'
