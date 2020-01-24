@@ -144,6 +144,9 @@ class DatabaseHandler:
         else:
             return Exception
 
+    def insert_current_prices(self, scraped_data):
+
+        return 'ok'
 
     @staticmethod
     def trim_link(link_to_trim):

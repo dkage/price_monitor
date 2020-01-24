@@ -61,4 +61,6 @@ def get_best_values():
             db_handler.insert_best_price(scraped_product_info['id'], scraped_product_info[current_best_price_store],
                                          current_best_price_store)
 
+        db_handler.insert_current_prices(scraped_product_info)
+
     return 'test'
