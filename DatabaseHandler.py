@@ -22,7 +22,7 @@ class DatabaseHandler:
         connected_cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
         self.cursor = connected_cursor
 
-    def select_from_db(self, select_statement):
+    def query_db(self, select_statement):
 
         self.cursor.execute(select_statement)
         # TODO ADD ERROR HANDLING TRY EXCEPTION
@@ -81,11 +81,11 @@ class DatabaseHandler:
 
     def select_all_products(self):
         sql = "SELECT * FROM products ORDER BY id;"
-        return self.select_from_db(sql)
+        return self.query_db(sql)
 
     def select_product_by_id(self, product_id):  # TODO MERGE THIS AND ABOVE INTO ONE USING DEFAULT
         sql = "SELECT * FROM products WHERE id = {}".format(product_id)
-        return self.select_from_db(sql)
+        return self.query_db(sql)
 
     def update_product(self):
         raise NotImplementedError("Need to be implemented")
@@ -105,7 +105,7 @@ class DatabaseHandler:
     def grab_best_price(self, product_id):
         query = "SELECT price FROM best_prices WHERE id_product = {} ORDER BY date DESC".format(product_id)
 
-        db_return = self.select_from_db(query)
+        db_return = self.query_db(query)
         if not db_return:
             return 0
         else:
