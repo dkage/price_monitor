@@ -15,7 +15,7 @@ def get_best_values():
 
     db_handler = DatabaseHandler()
 
-    products = db_handler.select_all_products()
+    products = db_handler.select_products()
     prices_array = []
 
     for product in products:

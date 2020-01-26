@@ -56,7 +56,7 @@ def add_or_edit_product():
         if 'id' in request.args:
 
             # grab product data on database
-            product_data = db_handler.select_product_by_id(request.args['id'])
+            product_data = db_handler.select_products(request.args['id'])
             print(product_data)
             if not product_data:
                 return render_template('not_found.html', title='Product not found', id=request.args['id'])
@@ -89,7 +89,7 @@ def delete_product():
 
 @app.route('/product_list')
 def prices_table():
-    product_list = db_handler.select_all_products()
+    product_list = db_handler.select_products()
 
     return render_template('product_list.html', list=product_list, kabum=kabum_base_url, pichau=pichau_base_url,
                            terabyte=terabyte_base_url)

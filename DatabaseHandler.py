@@ -79,13 +79,17 @@ class DatabaseHandler:
 
         return 'ok'
 
-    def select_all_products(self):
-        sql = "SELECT * FROM products ORDER BY id;"
-        return self.query_db(sql)
+    def select_products(self, product_id=None):
+        if product_id:
+            sql_query = "SELECT * FROM products WHERE id = {}".format(product_id)
+        else:
+            sql_query = "SELECT * FROM products ORDER BY id;"
 
-    def select_product_by_id(self, product_id):  # TODO MERGE THIS AND ABOVE INTO ONE USING DEFAULT
-        sql = "SELECT * FROM products WHERE id = {}".format(product_id)
-        return self.query_db(sql)
+        return self.query_db(sql_query)
+
+    def select_current_prices_by_id(self, product_id):
+        sql_query = 'SELECT * FROM current_prices WHERE product_id = {}'.format(product_id)
+        return self.query_db(sql_query)
 
     def update_product(self):
         raise NotImplementedError("Need to be implemented")
@@ -94,7 +98,7 @@ class DatabaseHandler:
         if product_id is None:
             return ['error', 'ID not passed']
 
-        exists = self.select_product_by_id(product_id)
+        exists = self.select_products(product_id)
         if not exists:
             return ['error', 'ID does not exist in database']
 
