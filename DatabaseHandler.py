@@ -134,19 +134,19 @@ class DatabaseHandler:
         print(best_price_dict)
 
         db_return = self.cursor.execute("INSERT INTO best_prices ("
-                                            "id_product, "
-                                            "price, "
-                                            "price_cash,"
-                                            "installments, "
-                                            "store"
-                                            ") VALUES (%s, %s, %s, %s, %s)",
-                                            (
-                                                product_id,
-                                                float(best_price_dict['price']),
-                                                float(best_price_dict['price_cash']),
-                                                best_price_dict['installments'],
-                                                store
-                                            ))
+                                        "id_product, "
+                                        "price, "
+                                        "price_cash,"
+                                        "installments, "
+                                        "store"
+                                        ") VALUES (%s, %s, %s, %s, %s)",
+                                        (
+                                            product_id,
+                                            float(best_price_dict['price']),
+                                            float(best_price_dict['price_cash']),
+                                            best_price_dict['installments'],
+                                            store
+                                        ))
         if not db_return:
             return 'placeholder'
         else:
@@ -164,6 +164,23 @@ class DatabaseHandler:
         exists_current = self.select_current_prices(product_id)
         if not exists_current:
             print('Product not yet logged. Inserting new row.')
+            # TODO add for using stores array static variable
+            self.cursor.execute("INSERT INTO current_prices ("
+                                 "product_id, "
+                                 "current_price, "
+                                 "current_price_cash,"
+                                 "installments, "
+                                 "store"
+                                 ") VALUES (%s, %s, %s, %s, %s)",
+                                 (
+                                    product_id,
+                                    scraped_data['kabum']['price'],
+                                    scraped_data['kabum']['price_cash'],
+                                    scraped_data['kabum']['installments'],
+                                    'kabum'
+                                 ))
+
+            print('test')
         else:
             print('Product already logged on, updating row.')
 
