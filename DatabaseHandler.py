@@ -81,14 +81,18 @@ class DatabaseHandler:
 
     def select_products(self, product_id=None):
         if product_id:
-            sql_query = "SELECT * FROM products WHERE id = {}".format(product_id)
+            sql_query = "SELECT * FROM products WHERE id = {};".format(product_id)
         else:
             sql_query = "SELECT * FROM products ORDER BY id;"
 
         return self.query_db(sql_query)
 
-    def select_current_prices_by_id(self, product_id):
-        sql_query = 'SELECT * FROM current_prices WHERE product_id = {}'.format(product_id)
+    def select_current_prices(self, product_id=None):
+        if product_id:
+            sql_query = 'SELECT * FROM current_prices WHERE product_id = {};'.format(product_id)
+        else:
+            sql_query = 'SELECT * FROM current_prices ORDER BY id;'
+
         return self.query_db(sql_query)
 
     def update_product(self):
@@ -149,6 +153,19 @@ class DatabaseHandler:
             return Exception
 
     def insert_current_prices(self, scraped_data):
+
+        product_id = scraped_data['id']
+
+        exists = self.select_products(product_id)
+        if not exists:
+            print('ERROR 00x1: Product ID received does not exist!')
+            return ['error', 'ID does not exist in database']
+
+        exists_current = self.select_current_prices(product_id)
+        if not exists_current:
+            print('Product not yet logged. Inserting new row.')
+        else:
+            print('Product already logged on, updating row.')
 
         return 'ok'
 
