@@ -162,27 +162,47 @@ class DatabaseHandler:
             return ['error', 'ID does not exist in database']
 
         exists_current = self.select_current_prices(product_id)
+
         if not exists_current:
             print('Product not yet logged. Inserting new row.')
-            # TODO add for using stores array static variable
-            self.cursor.execute("INSERT INTO current_prices ("
-                                 "product_id, "
-                                 "current_price, "
-                                 "current_price_cash,"
-                                 "installments, "
-                                 "store"
-                                 ") VALUES (%s, %s, %s, %s, %s)",
-                                 (
-                                    product_id,
-                                    scraped_data['kabum']['price'],
-                                    scraped_data['kabum']['price_cash'],
-                                    scraped_data['kabum']['installments'],
-                                    'kabum'
-                                 ))
 
-            print('test')
+            for store in stores_analyzed:
+                self.cursor.execute("INSERT INTO current_prices ("
+                                     "product_id, "
+                                     "current_price, "
+                                     "current_price_cash,"
+                                     "installments, "
+                                     "store"
+                                     ") VALUES (%s, %s, %s, %s, %s)",
+                                     (
+                                        product_id,
+                                        scraped_data[store]['price'],
+                                        scraped_data[store]['price_cash'],
+                                        scraped_data[store]['installments'],
+                                        store
+                                     ))
+
         else:
-            print('Product already logged on, updating row.')
+            print('Product already logged. Updating prices from last scraping.')
+            for store in stores_analyzed:
+                self.cursor.execute("UPDATE public.current_prices "
+                                    "SET product_id = %s, "
+                                     "current_price = %s, "
+                                     "current_price_cash = %s,"
+                                     "installments = %s, "
+                                     "store = %s, "
+                                     "last_update = now() "
+                                     "WHERE product_id = %s "
+                                     "AND store = %s;",
+                                    (
+                                        product_id,
+                                        scraped_data[store]['price'],
+                                        scraped_data[store]['price_cash'],
+                                        scraped_data[store]['installments'],
+                                        store,
+                                        product_id,
+                                        store
+                                    ))
 
         return 'ok'
 
