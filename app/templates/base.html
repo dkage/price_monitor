@@ -5,6 +5,7 @@
     {% else %}
         <title>Price Monitor</title>
     {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div id="menu">
@@ -15,20 +16,21 @@
 
 <hr>
 
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
+<div class="enclosure">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
-
-<div id="content">
-    {# Display block content on extend call #}
-    {% block content %}{% endblock %}
+    <div id="content">
+        {# Display block content on extend call #}
+        {% block content %}{% endblock %}
+    </div>
 </div>
 
 </body>
