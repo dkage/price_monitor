@@ -8,29 +8,32 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div id="menu">
-    <div class="button">Price Monitor: <a href="/index">Home</a></div>
-    <div class="button">New product: <a href="/product_editor">Product editor</a></div>
-    <div class="button">List of registered products: <a href="/product_list">List</a></div>
-</div>
+<div class="grid-container">
+    <div id="menu">
+        <div class="button">Price Monitor: <a href="/index">Home</a></div>
+        <div class="button">New product: <a href="/product_editor">Product editor</a></div>
+        <div class="button">List of registered products: <a href="/product_list">List</a></div>
+    </div>
 
-<hr>
+    <hr>
+    <div id="header">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
 
-<div class="enclosure">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
 
     <div id="content">
         {# Display block content on extend call #}
         {% block content %}{% endblock %}
     </div>
+
 </div>
 
 </body>
