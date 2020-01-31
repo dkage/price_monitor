@@ -9,10 +9,22 @@
 </head>
 <body>
 <div class="grid-container">
-    <div id="menu">
-        <div class="button">Price Monitor: <a href="/index">Home</a></div>
-        <div class="button">New product: <a href="/product_editor">Product editor</a></div>
-        <div class="button">List of registered products: <a href="/product_list">List</a></div>
+    <div class="nav-container">
+        <nav>
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger-menu">
+                <img id="hamburger" src="{{ url_for('static', filename='burger.png') }}" alt="">
+            </label>
+            <div class="left-menu">
+                <a href="/index">Home</a>
+                <a href="/product_editor">Product editor</a>
+                <a href="/product_list">List</a>
+            </div>
+            <div>
+                <a href="google.com" class="logo">Testing auto</a>
+            </div>
+        </nav>
+
     </div>
 
     <hr>
