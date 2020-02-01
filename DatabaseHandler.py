@@ -206,6 +206,28 @@ class DatabaseHandler:
 
         return 'ok'
 
+    def products_info_and_prices(self):
+        """
+        This method returns the correct array to be used by jinja when loading the index page
+        :return:
+        """
+        result_array = []
+        # TODO developed SQL for select "products" and "best_prices"
+        return ''
+
+    def create_current_array(self):
+        """
+        This method returns
+        :return:
+        """
+        return_array = []
+
+        current_array = self.select_current_prices()
+        # TODO add structure to return array like      item[ID][store] = prices[cash/installment/price]
+
+        return ''
+
+
     @staticmethod
     def trim_link(link_to_trim):
         """

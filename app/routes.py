@@ -14,11 +14,10 @@ db_handler = DatabaseHandler()
 @app.route('/index')
 @app.route('/home')
 def index():
-    try:
-        global user
-    except NameError:
-        user = 'Danilo'
-    return render_template("index.html", title="Home", user=user)
+    user = 'Danilo'  # TODO Maybe add login later?
+
+    products_data = db_handler.products_info_and_prices()
+    return render_template("index.html", title="Home", user=user, products=products_data)
 
 
 @app.route('/favicon.ico')
