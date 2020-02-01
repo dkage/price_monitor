@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ user }}, here are your products: </h1>
+    <h1 class="content_title">Hi, {{ user }}, here are your products: </h1>
+    {% for product in list %}
+        <div class="product_card">
+            <p>test data</p>
+        </div>
+    {% endfor %}
+
 
 {% endblock %}
