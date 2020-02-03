@@ -215,17 +215,27 @@ class DatabaseHandler:
         # TODO developed SQL for select "products" and "best_prices"
         return ''
 
-    def create_current_array(self):
+    def create_current_prices_array(self):
         """
-        This method returns
+        This method returns array like      item[ID][store] = prices[cash/installment/price] # TODO needs better comment
         :return:
         """
-        return_array = []
+        current_prices = dict()
 
-        current_array = self.select_current_prices()
-        # TODO add structure to return array like      item[ID][store] = prices[cash/installment/price]
+        current_prices_db_data = self.select_current_prices()
 
-        return ''
+        for row in current_prices_db_data:
+            # print(row)
+
+            if not current_prices.get(row['product_id']):
+                current_prices[row['product_id']] = dict()
+            current_prices[row['product_id']][row['store']] = dict()
+            current_prices[row['product_id']][row['store']]['price'] = row['current_price']
+            current_prices[row['product_id']][row['store']]['price_cash'] = row['current_price_cash']
+            current_prices[row['product_id']][row['store']]['installments'] = row['installments']
+            current_prices[row['product_id']][row['store']]['last_update'] = row['last_update']
+
+        return current_prices
 
 
     @staticmethod

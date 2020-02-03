@@ -52,4 +52,6 @@ db_handler = DatabaseHandler()
 # print(db_handler.grab_best_price(1))
 # print(db_handler.grab_best_price(2))
 
-get_best_values()
+array_return = db_handler.create_current_prices_array()
+
+print(array_return[1]['terabyte'])
