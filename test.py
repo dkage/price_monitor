@@ -52,6 +52,6 @@ db_handler = DatabaseHandler()
 # print(db_handler.grab_best_price(1))
 # print(db_handler.grab_best_price(2))
 
-array_return = db_handler.create_current_prices_array()
+array_return = db_handler.products_info_and_prices()
 
 print(array_return)

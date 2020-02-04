@@ -211,7 +211,8 @@ class DatabaseHandler:
         This method returns the correct array to be used by jinja when loading the index page
         :return:
         """
-        result_array = []
+
+
         query = "SELECT prods.id, prods.product_name, prods.product_type, prods.product_description, " \
                      "best.price, best.price_cash, best.installments, best.store " \
                 "FROM products AS prods " \
@@ -219,8 +220,19 @@ class DatabaseHandler:
                 "FROM best_prices " \
                 "ORDER BY id_product, date DESC) AS best " \
                 "ON prods.id = best.id_product;"
-        # TODO developed SQL for select "products" and "best_prices"
-        return ''
+
+        db_return = self.query_db(query)
+        print(db_return)
+        complete_array = db_return
+        current_prices = self.create_current_prices_array()
+        print(type(current_prices))
+        print(complete_array)
+        for row in complete_array:
+            product_id = row['id']
+            complete_array[id]['current_prices'] = list()
+            complete_array[id]['current_prices'] = current_prices[id]
+
+        return complete_array
 
     def create_current_prices_array(self):
         """
