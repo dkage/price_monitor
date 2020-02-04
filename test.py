@@ -54,4 +54,4 @@ db_handler = DatabaseHandler()
 
 array_return = db_handler.create_current_prices_array()
 
-print(array_return[1]['terabyte'])
+print(array_return)

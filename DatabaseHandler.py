@@ -212,6 +212,13 @@ class DatabaseHandler:
         :return:
         """
         result_array = []
+        query = "SELECT prods.id, prods.product_name, prods.product_type, prods.product_description, " \
+                     "best.price, best.price_cash, best.installments, best.store " \
+                "FROM products AS prods " \
+                "JOIN (SELECT DISTINCT ON (id_product) *  " \
+                "FROM best_prices " \
+                "ORDER BY id_product, date DESC) AS best " \
+                "ON prods.id = best.id_product;"
         # TODO developed SQL for select "products" and "best_prices"
         return ''
 
@@ -225,7 +232,6 @@ class DatabaseHandler:
         current_prices_db_data = self.select_current_prices()
 
         for row in current_prices_db_data:
-            # print(row)
 
             if not current_prices.get(row['product_id']):
                 current_prices[row['product_id']] = dict()
@@ -236,7 +242,6 @@ class DatabaseHandler:
             current_prices[row['product_id']][row['store']]['last_update'] = row['last_update']
 
         return current_prices
-
 
     @staticmethod
     def trim_link(link_to_trim):
