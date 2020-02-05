@@ -127,6 +127,7 @@ class DatabaseHandler:
 
         :param product_id: id of product in table 'products'
         :param best_price_dict: contains data got from scraper, product name, price, price in cash, and installments
+        :param store: name of store to be inserted
         :return: 'ok'
         """
         print('new best price')
@@ -212,9 +213,9 @@ class DatabaseHandler:
         :return:
         """
 
-
         query = "SELECT prods.id, prods.product_name, prods.product_type, prods.product_description, " \
-                     "best.price, best.price_cash, best.installments, best.store " \
+                     "best.price AS best_price, best.price_cash AS best_cash, best.installments AS best_installment, " \
+                     "best.store AS best_store " \
                 "FROM products AS prods " \
                 "JOIN (SELECT DISTINCT ON (id_product) *  " \
                 "FROM best_prices " \
@@ -222,15 +223,21 @@ class DatabaseHandler:
                 "ON prods.id = best.id_product;"
 
         db_return = self.query_db(query)
-        print(db_return)
-        complete_array = db_return
+
+        complete_array = dict()
         current_prices = self.create_current_prices_array()
-        print(type(current_prices))
-        print(complete_array)
-        for row in complete_array:
-            product_id = row['id']
-            complete_array[id]['current_prices'] = list()
-            complete_array[id]['current_prices'] = current_prices[id]
+        for row in db_return:
+            complete_array[row['id']] = dict({
+                'product_name': row['product_name'],
+                'product_type': row['product_type'],
+                'product_description': row['product_description'],
+                'best_price': row['best_price'],
+                'best_cash': row['best_cash'],
+                'best_installment': row['best_installment'],
+                'best_store': row['best_store'],
+                'current_prices': current_prices[row['id']]
+                }
+            )
 
         return complete_array
 
