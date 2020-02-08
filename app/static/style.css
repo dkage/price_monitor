@@ -1,5 +1,5 @@
 body {
-    background: black;
+    background: white;
     color: deepskyblue;
 }
 
@@ -35,6 +35,16 @@ nav{
 
 .product_card{
     background: purple;
+    border-radius: 20px;
+    float: left;
+    max-width: 100px;
+    max-height: 300px;
+    padding: 30px;
+    margin: 30px;
+}
+
+.product_card:hover {
+  box-shadow: 0 10px 25px 0 rgba(0,0,0,5);
 }
 
 .content_title{

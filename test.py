@@ -52,6 +52,8 @@ db_handler = DatabaseHandler()
 # print(db_handler.grab_best_price(1))
 # print(db_handler.grab_best_price(2))
 
-array_return = db_handler.products_info_and_prices()
+get_best_values()
 
-print(array_return)
+# array_return = db_handler.products_info_and_prices()
+
+# print(array_return)

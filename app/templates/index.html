@@ -2,10 +2,15 @@
 
 {% block content %}
     <h1 class="content_title">Hi, {{ user }}, here are your products: </h1>
-    {% for product in list %}
+
+
+    {% for product_id in products %}
+
         <div class="product_card">
-            <p>test data</p>
+            <div class="nome"> {{ products[product_id]['product_name'] }} </div>
+            <div class="prices">
+            </div>
         </div>
     {% endfor %}
-    
+
 {% endblock %}
