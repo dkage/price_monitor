@@ -17,7 +17,7 @@ def index():
     user = 'Danilo'  # TODO Maybe add login later?
 
     products_data = db_handler.products_info_and_prices()
-    return render_template("index.html", title="Home", user=user, products=products_data)
+    return render_template("index.html", title="Home", user=user, products=products_data, stores=stores_analyzed)
 
 
 @app.route('/favicon.ico')
