@@ -37,8 +37,7 @@ nav{
     background: purple;
     border-radius: 20px;
     float: left;
-    max-width: 100px;
-    max-height: 300px;
+    max-width: 250px;
     padding: 30px;
     margin: 30px;
 }
