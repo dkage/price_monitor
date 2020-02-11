@@ -18,10 +18,11 @@
                     Price: {{ products[product_id]['best_price'] }} <br>
                     Installments (no tax): {{ products[product_id]['best_installment'] }}
                 </div>
-            <br><br>
+                <br><br>
                 <div class="current_prices">
                     {% for store in stores %}
-                        <div class="store_current"> {{ store.upper() }}
+                        <div class="store_current">
+                            <p class="store_name">{{ store.upper() }}</p>
                             <p>Price: {{ products[product_id]['current_prices'][store]['price'] }}</p>
                             <p>Price cash: {{ products[product_id]['current_prices'][store]['price_cash'] }}</p>
                             <p>Installments: {{ products[product_id]['current_prices'][store]['installments'] }}</p>

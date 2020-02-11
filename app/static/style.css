@@ -1,6 +1,8 @@
 body {
     background: white;
     color: deepskyblue;
+    margin: 0;
+    font-family: "Arial Rounded MT Bold";
 }
 
 .grid-container{
@@ -10,6 +12,8 @@ body {
 .nav-container{
     background: #202020;
     width: 100%;
+    position: sticky;
+    top: 0;
 }
 
 nav{
@@ -33,19 +37,33 @@ nav{
     width: 50px;
 }
 
-.product_card{
+.product_card {
     background: purple;
     border-radius: 20px;
     float: left;
     max-width: 250px;
     padding: 30px;
     margin: 30px;
+    overflow: auto;
 }
 
 .product_card:hover {
-  box-shadow: 0 10px 25px 0 rgba(0,0,0,5);
+    box-shadow: 0 10px 25px 0 rgba(0,0,0,5);
 }
 
-.content_title{
+.content_title {
 
+}
+
+.product_name {
+    color: aquamarine;
+}
+
+.store_name {
+    color: aqua;
+}
+
+.store_current {
+    border: 2px solid deepskyblue;
+    padding: 10px;
 }
