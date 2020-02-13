@@ -26,7 +26,6 @@
 
     </div>
 
-    <hr>
     <div id="header">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -41,8 +40,10 @@
 
 
     <div id="content">
+
         {# Display block content on extend call #}
         {% block content %}{% endblock %}
+
     </div>
 
 </div>

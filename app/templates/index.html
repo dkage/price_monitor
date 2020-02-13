@@ -8,19 +8,21 @@
 
         <div class="product_card">
             <div class="product_info">
-                <div class="product_name"> {{ products[product_id]['product_name'] }} </div>
                 <div class="product_type"> {{ products[product_id]['product_type'] }} </div>
-            </div>
-            <div class="prices">
+                <div class="product_name"> {{ products[product_id]['product_name'] }} </div>
                 <div class="best_prices">
                     Store: {{ products[product_id]['best_store'] }} <br>
                     Price cash: {{ products[product_id]['best_cash'] }} <br>
                     Price: {{ products[product_id]['best_price'] }} <br>
                     Installments (no tax): {{ products[product_id]['best_installment'] }}
                 </div>
+            </div>
+            <div class="prices">
                 <br><br>
                 <div class="current_prices">
+
                     {% for store in stores %}
+
                         <div class="store_current">
                             <p class="store_name">{{ store.upper() }}</p>
                             <p>Price: {{ products[product_id]['current_prices'][store]['price'] }}</p>
@@ -28,10 +30,12 @@
                             <p>Installments: {{ products[product_id]['current_prices'][store]['installments'] }}</p>
                             <p>Last scrap: {{ products[product_id]['current_prices'][store]['last_update'] }}</p>
                         </div>
+
                     {% endfor %}
+
                 </div>
             </div>
         </div>
-    {% endfor %}
 
+    {% endfor %}
 {% endblock %}
