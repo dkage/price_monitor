@@ -1,55 +1,50 @@
+:root {
+    --lighter: #051733;
+    --darker: #030a18;
+    --border: #18436b;
+    --sidebar_lighter: #10203d;
+    --arrow_lighter: #3887cb;
+    --arrow_darker: #2e6eaa;
+    --icon: #3c90d8;
+    --selected_red_lighter: #bd3e52;
+    --selected_red_darker: #953345;
+}
+
+
 body {
-    /*background: linear-gradient(180deg, #051733, #030a18);*/
-    background: linear-gradient(0deg, #030a18, #051733 90%);;
+    background: linear-gradient(0deg, var(--darker), var(--lighter) 90%);;
     color: deepskyblue;
     margin: 0;
     font-family: "Arial Rounded MT Bold";
-    max-height: 100vh;
+    height: 100vh;
 }
-
-/*
-#051733 - lighter
-#030a18 - darker
-
-#18436b - border
-
-#10203d - lighter-side-bar
-
-
-#3887cb - arrow lighter
-#2e6eaa - arrow darker
-
-#3c90d8 - icon
-
-#bd3e52 - selected - red
-#953345 - selected - red
-
-*/
 
 .grid-container {
     display: grid;
-     grid-template: [header-left] "head head" 30px [header-right]
-                    [main-left]   "nav  main" 1fr  [main-right]
-                    [footer-left] "nav  foot" 30px [footer-right]
-                    / 120px 1fr;
+    grid-template: [main-left]   "nav  main" 1fr  [main-right]
+    [footer-left] "foot foot" 30px [footer-right]
+                    / 200px 1fr;
+    height: 100vh;
+
 }
 
 #content {
     max-height: 100vh;
     grid-area: main;
     overflow: auto;
+    padding-left: 20px;
 }
 
 .nav-container{
-    max-height: 100vh;
-    background: linear-gradient(0deg, #10203d, #030a18);
+    background: linear-gradient(0deg, var(--sidebar_lighter), var(--darker));
     border-right: #18436b solid 2px;
     grid-area: nav;
     left: 0;
     top: 0;
-    height: 100%;
-    position: fixed;
-    width: 200px;
+}
+
+.footer{
+    grid-area: foot;
 }
 
 .left-menu {
@@ -70,18 +65,60 @@ body {
     border-radius: 20px;
     float: left;
     max-width: 250px;
-    padding: 30px;
     margin: 30px;
     height: fit-content;
+    /*min-height: 200px;*/
     overflow: hidden;
+    --padding_side: 30px;
 }
 
 .product_card:hover {
     box-shadow: 0 10px 25px 0 rgb(151, 45, 195);
 }
 
-.content_title {
+.product_card .product_type {
+    padding: 8px var(--padding_side);
+    border-bottom: 2px solid var(--border);
+    text-align: center;
+}
 
+.product_card .product_info {
+    padding: 8px var(--padding_side);
+}
+
+.best_prices{
+    display: flex;
+    flex-direction: column;
+}
+.best_store_name{
+    text-align: center;
+    width: auto;
+    background: darkorange;
+    color: black;
+    font-style: italic;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 10px auto;
+    align-self: center;
+    display: inline-block;
+}
+
+.best_prices_values{
+    display: flex;
+}
+
+.best_prices_values div {
+    padding: 5px;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+
+.prices{
+    display: none;
+}
+
+.content_title {
 }
 
 .product_name {

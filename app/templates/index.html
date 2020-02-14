@@ -1,23 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="content_title">Hi, {{ user }}, here are your products: </h1>
+    <h3 class="content_title">Hi, {{ user }}, here are your products: </h3>
 
 
     {% for product_id in products %}
 
         <div class="product_card">
+            <div class="product_type"> {{ products[product_id]['product_type'] }} </div>
             <div class="product_info">
-                <div class="product_type"> {{ products[product_id]['product_type'] }} </div>
                 <div class="product_name"> {{ products[product_id]['product_name'] }} </div>
                 <div class="best_prices">
-                    Store: {{ products[product_id]['best_store'] }} <br>
-                    Price cash: {{ products[product_id]['best_cash'] }} <br>
-                    Price: {{ products[product_id]['best_price'] }} <br>
-                    Installments (no tax): {{ products[product_id]['best_installment'] }}
+                    <div class="best_store_name"> {{ products[product_id]['best_store'].upper() }} </div>
+                    <div class="best_prices_values">
+                        <div> {{ products[product_id]['best_cash'] }} </div>
+                        <div>
+                            {{ products[product_id]['best_price'] }}
+                            <span class="best_installments">
+                              {{ products[product_id]['best_installment'] }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="prices">
+            <div class="prices" style="display: none">
                 <br><br>
                 <div class="current_prices">
 

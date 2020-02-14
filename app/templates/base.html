@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="grid-container">
+
     <div class="nav-container">
         <nav>
             <label for="nav-toggle" class="burger-menu">
@@ -19,24 +20,20 @@
                 <a href="/product_editor">Product editor</a><br>
                 <a href="/product_list">List</a><br>
             </div>
-            <div>
-                <a href="google.com" class="logo">Testing auto</a>
-            </div>
         </nav>
-
     </div>
 
-{#    <div id="header">#}
-{#        {% with messages = get_flashed_messages() %}#}
-{#            {% if messages %}#}
-{#                <ul>#}
-{#                    {% for message in messages %}#}
-{#                        <li>{{ message }}</li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            {% endif %}#}
-{#        {% endwith %}#}
-{#    </div>#}
+    <div id="header">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
 
 
     <div id="content">
@@ -44,6 +41,10 @@
         {# Display block content on extend call #}
         {% block content %}{% endblock %}
 
+    </div>
+
+    <div class="footer">
+        <i>test</i>
     </div>
 
 </div>
