@@ -1,27 +1,54 @@
 body {
-    background: white;
+    /*background: linear-gradient(180deg, #051733, #030a18);*/
+    background: linear-gradient(0deg, #030a18, #051733 90%);;
     color: deepskyblue;
     margin: 0;
     font-family: "Arial Rounded MT Bold";
+    max-height: 100vh;
 }
 
-#content {
-    left: 200px;
-}
+/*
+#051733 - lighter
+#030a18 - darker
+
+#18436b - border
+
+#10203d - lighter-side-bar
+
+
+#3887cb - arrow lighter
+#2e6eaa - arrow darker
+
+#3c90d8 - icon
+
+#bd3e52 - selected - red
+#953345 - selected - red
+
+*/
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+     grid-template: [header-left] "head head" 30px [header-right]
+                    [main-left]   "nav  main" 1fr  [main-right]
+                    [footer-left] "nav  foot" 30px [footer-right]
+                    / 120px 1fr;
+}
+
+#content {
+    max-height: 100vh;
+    grid-area: main;
+    overflow: auto;
 }
 
 .nav-container{
-    grid-column: 1;
-    grid-row: 1 / 5;
+    max-height: 100vh;
+    background: linear-gradient(0deg, #10203d, #030a18);
+    border-right: #18436b solid 2px;
+    grid-area: nav;
     left: 0;
     top: 0;
-    background: #202020;
     height: 100%;
-    position: sticky;
+    position: fixed;
     width: 200px;
 }
 
@@ -30,7 +57,7 @@ body {
 }
 
 .logo {
-    grid-column: 2;
+
 }
 
 #hamburger{
@@ -50,7 +77,7 @@ body {
 }
 
 .product_card:hover {
-    box-shadow: 0 10px 25px 0 rgba(0,0,0,5);
+    box-shadow: 0 10px 25px 0 rgb(151, 45, 195);
 }
 
 .content_title {

@@ -15,9 +15,9 @@
                 <img id="hamburger" src="{{ url_for('static', filename='burger.png') }}" alt="">
             </label>
             <div class="left-menu">
-                <a href="/index">Home</a>
-                <a href="/product_editor">Product editor</a>
-                <a href="/product_list">List</a>
+                <a href="/index">Home</a><br>
+                <a href="/product_editor">Product editor</a><br>
+                <a href="/product_list">List</a><br>
             </div>
             <div>
                 <a href="google.com" class="logo">Testing auto</a>
@@ -26,17 +26,17 @@
 
     </div>
 
-    <div id="header">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-    </div>
+{#    <div id="header">#}
+{#        {% with messages = get_flashed_messages() %}#}
+{#            {% if messages %}#}
+{#                <ul>#}
+{#                    {% for message in messages %}#}
+{#                        <li>{{ message }}</li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            {% endif %}#}
+{#        {% endwith %}#}
+{#    </div>#}
 
 
     <div id="content">
