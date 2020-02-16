@@ -93,7 +93,11 @@ def get_pichau(product_string):
 
     product = dict()
 
-    product["product_name"] = soup.find('div', {'class': 'product title'}).find('h1').text
+    print(pichau_check_availability(soup))
+    try:
+        product["product_name"] = soup.find('div', {'class': 'product title'}).find('h1').text
+    except AttributeError:
+        product["product_name"] = 'REMOVED'
 
     if pichau_check_availability(soup):
         product["price"] = only_numbers(soup.find('span', {'class': 'price'}).text)
@@ -108,7 +112,7 @@ def get_pichau(product_string):
 
 
 def pichau_check_availability(soup):
-    if soup.find('div', {'class': 'stock unavailable'}):
+    if soup.find('div', {'class': 'stock unavailable'}) or soup.find('div', {'class': 'mensagem-vazio'}):
         return False
     else:
         return True
