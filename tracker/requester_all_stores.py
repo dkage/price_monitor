@@ -93,7 +93,6 @@ def get_pichau(product_string):
 
     product = dict()
 
-    print(pichau_check_availability(soup))
     try:
         product["product_name"] = soup.find('div', {'class': 'product title'}).find('h1').text
     except AttributeError:

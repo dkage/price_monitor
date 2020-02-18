@@ -52,7 +52,11 @@ db_handler = DatabaseHandler()
 # print(db_handler.grab_best_price(1))
 # print(db_handler.grab_best_price(2))
 
-get_best_values()
+# get_best_values()
+
+# https://www.pichau.com.br/ssd-kingston-120gb-ssdnow-a400-sata-3-2-5-solid-state-drive-sa400s37-120g
+link = "/ssd-kingston-120gb-ssdnow-a400-sata-3-2-5-solid-state-drive-sa400s37-120g"
+print(get_pichau(link))
 
 # array_return = db_handler.products_info_and_prices()
 
