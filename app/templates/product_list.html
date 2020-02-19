@@ -5,16 +5,16 @@
     <table>
         <tbody>
             <tr>
-                <td>Product ID</td>
-                <td>Product type</td>
-                <td>Product name</td>
-                <td>Product description</td>
-                <td>Kabum</td>
-                <td>Pichau</td>
-                <td>Terabyte</td>
-                <td>Date added</td>
-                <td>Edit link</td>
-                <td>Delete</td>
+                <th>Product ID</th>
+                <th>Product type</th>
+                <th>Product name</th>
+                <th>Product description</th>
+                <th>Kabum</th>
+                <th>Pichau</th>
+                <th>Terabyte</th>
+                <th>Date added</th>
+                <th>Edit link</th>
+                <th>Delete</th>
             </tr>
 
             {% for product in list %}
@@ -25,13 +25,13 @@
                         <td>{{ product[3] }}</td>   {# Product description #}
 
                         {% if product[4] != 'Invalid link given.' %}
-                            <td><a href="{{ kabum    ~ product[4] }}">link</a></td>   {# Kabum #}
+                            <td><a href="{{ kabum ~ product[4] }}">link</a></td>   {# Kabum #}
                         {% else %}
                             <td>Not given</td>
                         {% endif %}
 
                         {% if product[5] != 'Invalid link given.' %}
-                            <td><a href="{{ pichau   ~ product[5] }}">link</a></td>   {# Pichau #}
+                            <td><a href="{{ pichau ~ product[5] }}">link</a></td>   {# Pichau #}
                         {% else %}
                             <td>Not given</td>
                         {% endif %}
