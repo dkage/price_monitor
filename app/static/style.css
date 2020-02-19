@@ -1,18 +1,27 @@
 :root {
-    --lighter: #051733;
-    --darker: #030a18;
-    --border: #18436b;
-    --sidebar_lighter: #10203d;
+    --main_darker: #030a18;
+    --main_lighter: #051733;
+    --main_lightest: #349cff;
+    --borders: #2662a4;
     --arrow_lighter: #3887cb;
     --arrow_darker: #2e6eaa;
     --icon: #3c90d8;
-    --selected_red_lighter: #bd3e52;
-    --selected_red_darker: #953345;
+    --selected_color: #bd3e52;
+    --selected_accent: #953345;
+
+    --new: #bd2e51;
+    --new-bg: #040220;
+    --new-colog: #646373;
+    --new-red-accent: #cd224c;
+    --new-yellow-accent: #f3c845;
+    --new-lightblue-accent: #51b0c3;
+    --new-darkerblue-accent: #32637b;
+    --new-purple-accent: #47418a;
 }
 
 
 body {
-    background: linear-gradient(0deg, var(--darker), var(--lighter) 90%);;
+    background: linear-gradient(0deg, var(--main_darker), var(--main_lighter) 90%);;
     color: deepskyblue;
     margin: 0;
     font-family: "Arial Rounded MT Bold";
@@ -36,7 +45,7 @@ body {
 }
 
 .nav-container{
-    background: linear-gradient(0deg, var(--sidebar_lighter), var(--darker));
+    background: grey;
     border-right: #18436b solid 2px;
     grid-area: nav;
     left: 0;
@@ -78,7 +87,7 @@ body {
 
 .product_card .product_type {
     padding: 8px var(--padding_side);
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px solid var(--borders);
     text-align: center;
 }
 
@@ -136,4 +145,16 @@ body {
 .store_current {
     border: 2px solid deepskyblue;
     padding: 10px;
+}
+
+table {
+    font-size: x-small;
+    text-align: center;
+    border: 1px solid black;
+}
+
+th {
+    background: darkorange;
+    color: black;
+    text-align: center;
 }
