@@ -9,9 +9,12 @@
     --selected_color: #bd3e52;
     --selected_accent: #953345;
 
-    --new: #bd2e51;
     --new-bg: #040220;
-    --new-colog: #646373;
+    --new-bg-light: #050241;
+    --new-bg-gradient-light: #100e2c;
+    --new-font_color: #b5b2d0;
+    --new-secondary-font_color: #424160;
+    --new-red: #bd2e51;
     --new-red-accent: #cd224c;
     --new-yellow-accent: #f3c845;
     --new-lightblue-accent: #51b0c3;
@@ -21,11 +24,15 @@
 
 
 body {
-    background: linear-gradient(0deg, var(--main_darker), var(--main_lighter) 90%);;
+    background: var(--new-bg);
     color: deepskyblue;
     margin: 0;
-    font-family: "Arial Rounded MT Bold";
+    font-family: "Roboto Thin";
     height: 100vh;
+}
+
+.title {
+    padding-top: 20px;
 }
 
 .grid-container {
@@ -45,7 +52,7 @@ body {
 }
 
 .nav-container{
-    background: grey;
+    background: var(--new-bg-light);
     border-right: #18436b solid 2px;
     grid-area: nav;
     left: 0;
@@ -53,6 +60,7 @@ body {
 }
 
 .footer{
+    background: black;
     grid-area: foot;
 }
 
@@ -70,7 +78,8 @@ body {
 }
 
 .product_card {
-    background: purple;
+    background: linear-gradient(to bottom right, var(--new-bg-light), var(--new-bg-gradient-light));
+    border: 1px solid var(--new-font_color);
     border-radius: 20px;
     float: left;
     max-width: 250px;
@@ -87,7 +96,7 @@ body {
 
 .product_card .product_type {
     padding: 8px var(--padding_side);
-    border-bottom: 2px solid var(--borders);
+    border-bottom: 2px solid var(--new-red-accent);
     text-align: center;
 }
 
@@ -102,7 +111,7 @@ body {
 .best_store_name{
     text-align: center;
     width: auto;
-    background: darkorange;
+    background: var(--new-yellow-accent);
     color: black;
     font-style: italic;
     border-radius: 10px;
@@ -131,11 +140,11 @@ body {
 }
 
 .product_name {
-    color: aquamarine;
+    color: var(--new-font_color);
 }
 
 .store_name {
-    color: aqua;
+
 }
 
 .current_prices {

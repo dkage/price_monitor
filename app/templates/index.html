@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3 class="content_title">Hi, {{ user }}, here are your products: </h3>
-
+    <div class="title">
+        <div class="content_title">Hi, {{ user }}, here are your products: </div>
+    </div>
 
     {% for product_id in products %}
 
