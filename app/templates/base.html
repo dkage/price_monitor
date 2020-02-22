@@ -7,20 +7,25 @@
     {% endif %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ccb72ddca1.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="grid-container">
 
     <div class="nav-container">
         <nav>
-            <label for="nav-toggle" class="burger-menu">
-                <img id="hamburger" src="{{ url_for('static', filename='burger.png') }}" alt="">
-            </label>
-            <div class="left-menu">
-                <a href="/index">Home</a><br>
-                <a href="/product_editor">Product editor</a><br>
-                <a href="/product_list">List</a><br>
+{#            <label for="nav-toggle" class="burger-menu">#}
+{#                <img id="hamburger" src="{{ url_for('static', filename='burger.png') }}" alt="">#}
+{#            </label>#}
+            <div class="menu-title">Menu</div>
+
+
+            <div class="menu-options">
+                <a href="/index"><i class="fas fa-home"></i>Home</a><br>
+                <a href="/product_editor"> <i class="fa fa-pencil"></i>Product editor</a><br>
+                <a href="/product_list"><i class="fas fa-table"></i>List</a><br>
             </div>
+
         </nav>
     </div>
 

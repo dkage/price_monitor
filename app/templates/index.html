@@ -14,8 +14,10 @@
                 <div class="best_prices">
                     <div class="best_store_name"> {{ products[product_id]['best_store'].upper() }} </div>
                     <div class="best_prices_values">
+                        <span><i class="fas fa-money-bill-wave"></i></span>
                         <div> {{ products[product_id]['best_cash'] }} </div>
                         <div>
+                            <span><i class="fas fa-credit-card"></i></span>
                             {{ products[product_id]['best_price'] }}
                             <span class="best_installments">
                               {{ products[product_id]['best_installment'] }}
